@@ -101,7 +101,7 @@ class HomePage extends StatelessWidget {
   }
 }
 
-// ==================== 学习页面 ====================
+// ==================== 学习页 ====================
 
 class StudyPage extends StatefulWidget {
   const StudyPage({super.key});
@@ -141,6 +141,26 @@ class _StudyPageState extends State<StudyPage> {
       'zh': '起舞弄清影，何似在人间。',
       'es':
           'Bailo con mi sombra clara; nada se compara con el mundo humano.',
+    },
+    {
+      'zh': '转朱阁，低绮户，照无眠。',
+      'es':
+          'La luna gira sobre el pabellón rojo, baja hasta la ventana y alumbra a quien no duerme.',
+    },
+    {
+      'zh': '不应有恨，何事长向别时圆？',
+      'es':
+          'No debería guardar rencor; ¿por qué está siempre llena cuando estamos separados?',
+    },
+    {
+      'zh': '人有悲欢离合，月有阴晴圆缺，此事古难全。',
+      'es':
+          'Las personas conocen alegría y tristeza, encuentros y despedidas; la luna crece y mengua.',
+    },
+    {
+      'zh': '但愿人长久，千里共婵娟。',
+      'es':
+          'Deseo que vivamos muchos años y compartamos la belleza de la luna aunque estemos lejos.',
     },
   ];
 
@@ -237,7 +257,7 @@ class _StudyPageState extends State<StudyPage> {
                             ),
                           ),
                           subtitle: Text(
-                            'Lectura · 自动朗读',
+                            'Lectura · 全词朗读',
                             style: TextStyle(fontSize: 12),
                           ),
                           trailing:
@@ -407,7 +427,7 @@ class _StudyPageState extends State<StudyPage> {
   }
 }
 
-// ==================== 阅读页面 ====================
+// ==================== 全词阅读页 ====================
 
 class ReadingPage extends StatefulWidget {
   const ReadingPage({super.key});
@@ -417,8 +437,13 @@ class ReadingPage extends StatefulWidget {
       _ReadingPageState();
 }
 
-class _ReadingPageState extends State<ReadingPage> {
+class _ReadingPageState extends State<ReadingPage>
+    with SingleTickerProviderStateMixin {
   final FlutterTts flutterTts = FlutterTts();
+
+  late AnimationController animationController;
+  late Animation<double> scaleAnimation;
+  late Animation<Offset> moveAnimation;
 
   final String poem =
       '明月几时有？\n'
@@ -426,24 +451,62 @@ class _ReadingPageState extends State<ReadingPage> {
       '不知天上宫阙，今夕是何年。\n'
       '我欲乘风归去，又恐琼楼玉宇，\n'
       '高处不胜寒。\n'
-      '起舞弄清影，何似在人间。';
+      '起舞弄清影，何似在人间。\n\n'
+      '转朱阁，低绮户，照无眠。\n'
+      '不应有恨，何事长向别时圆？\n'
+      '人有悲欢离合，月有阴晴圆缺，\n'
+      '此事古难全。\n'
+      '但愿人长久，千里共婵娟。';
 
   int visibleCharacters = 0;
 
   @override
   void initState() {
     super.initState();
+
+    animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 35),
+    );
+
+    scaleAnimation = Tween<double>(
+      begin: 1.0,
+      end: 1.12,
+    ).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: Curves.easeInOut,
+      ),
+    );
+
+    moveAnimation = Tween<Offset>(
+      begin: const Offset(-0.015, 0),
+      end: const Offset(0.025, -0.015),
+    ).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: Curves.easeInOut,
+      ),
+    );
+
+    animationController.repeat(
+      reverse: true,
+    );
+
     startReading();
   }
 
   Future<void> startReading() async {
     await Future.delayed(
-      const Duration(milliseconds: 600),
+      const Duration(milliseconds: 700),
     );
 
+    await flutterTts.stop();
     await flutterTts.setLanguage('zh-CN');
-    await flutterTts.setSpeechRate(0.40);
-    await flutterTts.speak(
+    await flutterTts.setSpeechRate(0.38);
+    await flutterTts.awaitSpeakCompletion(true);
+
+    final speaking = flutterTts.speak(
       poem.replaceAll('\n', ' '),
     );
 
@@ -461,6 +524,10 @@ class _ReadingPageState extends State<ReadingPage> {
       }
     }
 
+    await speaking;
+
+    if (!mounted) return;
+
     await Future.delayed(
       const Duration(milliseconds: 1200),
     );
@@ -473,15 +540,14 @@ class _ReadingPageState extends State<ReadingPage> {
   @override
   void dispose() {
     flutterTts.stop();
+    animationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final int count = visibleCharacters.clamp(
-      0,
-      poem.length,
-    );
+    final int count =
+        visibleCharacters.clamp(0, poem.length);
 
     final String shown =
         poem.substring(0, count);
@@ -491,9 +557,23 @@ class _ReadingPageState extends State<ReadingPage> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset(
-            readingImage,
-            fit: BoxFit.cover,
+          ClipRect(
+            child: AnimatedBuilder(
+              animation: animationController,
+              builder: (context, child) {
+                return SlideTransition(
+                  position: moveAnimation,
+                  child: ScaleTransition(
+                    scale: scaleAnimation,
+                    child: child,
+                  ),
+                );
+              },
+              child: Image.asset(
+                readingImage,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
 
           Container(
@@ -502,9 +582,9 @@ class _ReadingPageState extends State<ReadingPage> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color(0x22000000),
-                  Color(0x44000000),
-                  Color(0xBB000000),
+                  Color(0x11000000),
+                  Color(0x33000000),
+                  Color(0xCC000000),
                 ],
               ),
             ),
@@ -529,9 +609,7 @@ class _ReadingPageState extends State<ReadingPage> {
                           color: Colors.white,
                         ),
                       ),
-
                       const Spacer(),
-
                       const Text(
                         '水调歌头 · 阅读',
                         style: TextStyle(
@@ -540,9 +618,7 @@ class _ReadingPageState extends State<ReadingPage> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-
                       const Spacer(),
-
                       const SizedBox(width: 48),
                     ],
                   ),
@@ -552,39 +628,33 @@ class _ReadingPageState extends State<ReadingPage> {
 
                 Container(
                   width: double.infinity,
-                  margin: const EdgeInsets.all(18),
-                  padding: const EdgeInsets.all(18),
+                  constraints: const BoxConstraints(
+                    maxHeight: 410,
+                  ),
+                  margin: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.black.withValues(
-                      alpha: 0.52,
+                      alpha: 0.54,
                     ),
                     borderRadius: BorderRadius.circular(24),
                   ),
-                  child: Column(
-                    children: [
-                      Text(
-                        shown,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 19,
-                          height: 1.75,
-                          fontWeight: FontWeight.w500,
-                        ),
+                  child: SingleChildScrollView(
+                    reverse: true,
+                    child: Text(
+                      shown,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        height: 1.65,
+                        fontWeight: FontWeight.w500,
                       ),
-
-                      const SizedBox(height: 8),
-
-                      const Text(
-                        '文字随着朗读逐字出现',
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 11,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
+
+                const SizedBox(height: 8),
               ],
             ),
           ),
