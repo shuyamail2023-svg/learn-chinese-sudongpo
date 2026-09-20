@@ -97,7 +97,7 @@ class HomePage extends StatelessWidget {
                         '明月几时有？\n'
                         '把酒问青天。\n'
                         '不知天上宫阙，\n'
-                        '今夕是何年。',
+                        '今夕是何年。'
                         '我欲乘风归去，\n'
                         '又恐琼楼玉宇，\n'
                         '高处不胜寒。\n'
