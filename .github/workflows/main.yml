@@ -27,3 +27,8 @@ jobs:
         run: flutter create . --platforms web
       - name: Build web
         run: flutter build web
+      - name: Upload web app
+        uses: actions/upload-artifact@v4
+        with:
+          name: learn-chinese-sudongpo-web
+          path: build/web
