@@ -98,6 +98,11 @@ class HomePage extends StatelessWidget {
                         '把酒问青天。\n'
                         '不知天上宫阙，\n'
                         '今夕是何年。',
+                        '我欲乘风归去，\n'
+                        '又恐琼楼玉宇，\n'
+                        '高处不胜寒。\n'
+                        '起舞弄清影，\n'
+                        '何似在人间。'
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 22,
