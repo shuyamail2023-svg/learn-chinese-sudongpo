@@ -199,7 +199,7 @@ class _StudyPageState extends State<StudyPage> {
 ElevatedButton.icon(
   onPressed: speakPoem,
   icon: const Icon(Icons.volume_up),
-  label: const Text('朗读诗词'),
+  label: const Text('🔊 听 · 慢速朗读'),
 ),
 
 const SizedBox(height: 20),
