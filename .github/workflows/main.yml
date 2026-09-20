@@ -7,9 +7,19 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
 
     steps:
@@ -23,12 +33,21 @@ jobs:
 
       - name: Get packages
         run: flutter pub get
+
       - name: Configure web
         run: flutter create . --platforms web
+
       - name: Build web
-        run: flutter build web
-      - name: Upload web app
-        uses: actions/upload-artifact@v4
+        run: flutter build web --base-href "/learn-chinese-sudongpo/"
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: learn-chinese-sudongpo-web
           path: build/web
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
