@@ -152,7 +152,14 @@ class _StudyPageState extends State<StudyPage> {
   bool checked = false;
 
   final String correctAnswer = '青天';
-
+  final FlutterTts flutterTts = FlutterTts();
+  Future<void> speakPoem() async {
+  await flutterTts.setLanguage('zh-CN');
+  await flutterTts.setSpeechRate(0.45);
+  await flutterTts.speak(
+    '明月几时有？把酒问青天。不知天上宫阙，今夕是何年。',
+  );
+}
   void checkAnswer() {
     setState(() {
       checked = true;
@@ -184,7 +191,13 @@ class _StudyPageState extends State<StudyPage> {
               ),
 
               const SizedBox(height: 28),
+ElevatedButton.icon(
+  onPressed: speakPoem,
+  icon: const Icon(Icons.volume_up),
+  label: const Text('朗读诗词'),
+),
 
+const SizedBox(height: 20),
               Card(
                 child: Padding(
                   padding: const EdgeInsets.all(24),
