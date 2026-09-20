@@ -102,7 +102,7 @@ class HomePage extends StatelessWidget {
                         '又恐琼楼玉宇，\n'
                         '高处不胜寒。\n'
                         '起舞弄清影，\n'
-                        '何似在人间。'
+                        '何似在人间。',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 22,
