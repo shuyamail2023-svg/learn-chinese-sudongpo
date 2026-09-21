@@ -202,7 +202,7 @@ class PoemSelectionPage extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) =>
-                                      const StudyPage(),
+                                      StudyPage(poemIndex: index),
                                 ),
                               );
                             }
@@ -297,9 +297,11 @@ class PoemSelectionPage extends StatelessWidget {
 // ==================================================
 // 学习页面
 // ==================================================
-
 class StudyPage extends StatelessWidget {
-  const StudyPage({super.key});
+  final int poemIndex;
+
+  const StudyPage({super.key, required this.poemIndex});
+
 
   Widget learningCard({
     required BuildContext context,
@@ -365,21 +367,22 @@ class StudyPage extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(18, 0, 18, 28),
           child: Column(
             children: [
-              const Text(
-                '《水调歌头》',
-                style: TextStyle(
-                  fontSize: 27,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+Text(
+  poemIndex == 0 ? '《水调歌头》' : '《念奴娇·赤壁怀古》',
+  style: const TextStyle(
+    fontSize: 27,
+    fontWeight: FontWeight.bold,
+  ),
+),
               const SizedBox(height: 4),
-              const Text(
-                '明月几时有',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.black54,
-                ),
-              ),
+             Text(
+  poemIndex == 0 ? '明月几时有' : '大江东去，浪淘尽',
+  style: const TextStyle(
+    fontSize: 14,
+    color: Colors.black54,
+  ),
+),
+    
               const SizedBox(height: 4),
               const Text(
                 'Su Shi · 苏轼',
@@ -396,7 +399,7 @@ class StudyPage extends StatelessWidget {
                 title: '阅读',
                 spanish: 'Lectura · 欣赏诗词，动画朗读',
                 color: const Color(0xFFF6DED3),
-                page: const ReadingPage(),
+                page: ReadingPage(poemIndex: poemIndex),
               ),
 
               const SizedBox(height: 10),
@@ -433,7 +436,9 @@ class StudyPage extends StatelessWidget {
 // ==================================================
 
 class ReadingPage extends StatefulWidget {
-  const ReadingPage({super.key});
+  final int poemIndex;
+
+  const ReadingPage({super.key, required this.poemIndex});
 
   @override
   State<ReadingPage> createState() => _ReadingPageState();
@@ -445,19 +450,27 @@ class _ReadingPageState extends State<ReadingPage>
 
   late AnimationController controller;
   late Animation<double> scaleAnimation;
+late final String poem = widget.poemIndex == 0
+    ? '明月几时有？ \n'
+      '把酒问青天。 \n'
+      '不知天上宫阙，今夕是何年。 \n'
+      '我欲乘风归去，又恐琼楼玉宇， \n'
+      '高处不胜寒。 \n'
+      '起舞弄清影，何似在人间。 \n\n'
+      '转朱阁，低绮户，照无眠。 \n'
+      '不应有恨，何事长向别时圆？ \n'
+      '人有悲欢离合，月有阴晴圆缺， \n'
+      '此事古难全。 \n'
+      '但愿人长久，千里共婵娟。 '
+    : '大江东去，浪淘尽，千古风流人物。 \n'
+      '故垒西边，人道是，三国周郎赤壁。 \n'
+      '乱石穿空，惊涛拍岸，卷起千堆雪。 \n'
+      '江山如画，一时多少豪杰。 \n\n'
+      '遥想公瑾当年，小乔初嫁了，雄姿英发。 \n'
+      '羽扇纶巾，谈笑间，樯橹灰飞烟灭。 \n'
+      '故国神游，多情应笑我，早生华发。 \n'
+      '人生如梦，一尊还酹江月。 ';
 
-  final String poem =
-      '明月几时有？\n'
-      '把酒问青天。\n'
-      '不知天上宫阙，今夕是何年。\n'
-      '我欲乘风归去，又恐琼楼玉宇，\n'
-      '高处不胜寒。\n'
-      '起舞弄清影，何似在人间。\n\n'
-      '转朱阁，低绮户，照无眠。\n'
-      '不应有恨，何事长向别时圆？\n'
-      '人有悲欢离合，月有阴晴圆缺，\n'
-      '此事古难全。\n'
-      '但愿人长久，千里共婵娟。';
 
   int visibleCharacters = 0;
 
