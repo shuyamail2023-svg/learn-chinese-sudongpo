@@ -688,6 +688,106 @@ Future<void> speak(String text) async {
   await tts.setSpeechRate(0.38);
   await tts.speak(text);
 }
+  @override
+  void dispose() {
+    tts.stop();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              '跟读',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            Text(
+              'Repetición',
+              style: TextStyle(fontSize: 10),
+            ),
+          ],
+        ),
+      ),
+      body: SafeArea(
+        child: ListView.separated(
+          padding: const EdgeInsets.fromLTRB(
+            16,
+            10,
+            16,
+            24,
+          ),
+          itemCount: lines.length,
+          separatorBuilder: (_, __) =>
+              const Divider(height: 18),
+          itemBuilder: (context, index) {
+            final line = lines[index];
+
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 4,
+              ),
+              child: Row(
+                crossAxisAlignment:
+                    CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          line['zh']!,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            height: 1.35,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          line['py']!,
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: Colors.black45,
+                            height: 1.35,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          line['es']!,
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: Colors.black54,
+                            height: 1.35,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.volume_up_rounded,
+                    ),
+                    onPressed: () {
+                      speak(line['zh']!);
+                    },
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
 }
 // ==================================================
 // 填空页面
