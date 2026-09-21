@@ -929,7 +929,17 @@ class _QuizPageState extends State<QuizPage> {
           ),
         ],
       ),
-      body: SafeArea(
+      body: Container(
+  decoration: const BoxDecoration(
+    image: DecorationImage(
+      image: AssetImage(
+        '16F1DCC9-0A88-4597-ADC5-1B7B5EBE3A65.png',
+      ),
+      fit: BoxFit.cover,
+      opacity: 0.16,
+    ),
+  ),
+  child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(22),
           child: Column(
@@ -1019,6 +1029,7 @@ class _QuizPageState extends State<QuizPage> {
           ),
         ),
       ),
+    ),
     );
   }
 }
