@@ -22,14 +22,16 @@ class LearnChineseApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: const Color(0xFF8B5E3C),
-        scaffoldBackgroundColor: const Color(0xFFF7F1E7),
+        scaffoldBackgroundColor: const Color(0xFFF8F3EA),
       ),
       home: const HomePage(),
     );
   }
 }
 
-// ==================== 首页 ====================
+// ==================================================
+// 首页
+// ==================================================
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -42,7 +44,7 @@ class HomePage extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => const StudyPage(),
+              builder: (_) => const PoemSelectionPage(),
             ),
           );
         },
@@ -60,7 +62,7 @@ class HomePage extends StatelessWidget {
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.transparent,
-                    Color(0x33000000),
+                    Color(0x66000000),
                   ],
                 ),
               ),
@@ -70,24 +72,21 @@ class HomePage extends StatelessWidget {
                 children: [
                   const Spacer(),
                   Container(
-                    margin: const EdgeInsets.all(22),
+                    margin: const EdgeInsets.all(24),
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 18,
-                      vertical: 12,
+                      horizontal: 22,
+                      vertical: 13,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.black.withValues(
-                        alpha: 0.42,
-                      ),
-                      borderRadius: BorderRadius.circular(22),
+                      color: Colors.black.withValues(alpha: 0.42),
+                      borderRadius: BorderRadius.circular(24),
                     ),
                     child: const Text(
-                      '轻触进入学习 · Toca para empezar',
-                      textAlign: TextAlign.center,
+                      '点击进入 · Toca para entrar',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
@@ -101,323 +100,260 @@ class HomePage extends StatelessWidget {
   }
 }
 
-// ==================== 学习页 ====================
+// ==================================================
+// 选诗页面
+// ==================================================
 
-class StudyPage extends StatefulWidget {
-  const StudyPage({super.key});
+class PoemSelectionPage extends StatelessWidget {
+  const PoemSelectionPage({super.key});
 
-  @override
-  State<StudyPage> createState() => _StudyPageState();
-}
-
-class _StudyPageState extends State<StudyPage> {
-  final FlutterTts flutterTts = FlutterTts();
-
-  String? selectedAnswer;
-  bool checked = false;
-
-  final String correctAnswer = '青天';
-
-  final List<Map<String, String>> poemLines = const [
+  static const List<Map<String, String>> poems = [
     {
-      'zh': '明月几时有？',
-      'es': '¿Cuándo apareció la luna brillante?',
+      'title': '水调歌头·明月几时有',
+      'es': 'Preludio del agua · ¿Cuándo apareció la luna?',
     },
     {
-      'zh': '把酒问青天。',
-      'es': 'Alzo mi copa y pregunto al cielo.',
+      'title': '念奴娇·赤壁怀古',
+      'es': 'Recuerdos del Acantilado Rojo',
     },
     {
-      'zh': '不知天上宫阙，今夕是何年。',
-      'es':
-          'No sé qué año será esta noche en el palacio celestial.',
+      'title': '定风波·莫听穿林打叶声',
+      'es': 'Calmando el viento y las olas',
     },
     {
-      'zh': '我欲乘风归去，又恐琼楼玉宇，高处不胜寒。',
-      'es':
-          'Quisiera volver con el viento, pero temo el frío de los palacios celestiales.',
+      'title': '江城子·密州出猎',
+      'es': 'La cacería de Mizhou',
     },
     {
-      'zh': '起舞弄清影，何似在人间。',
-      'es':
-          'Bailo con mi sombra clara; nada se compara con el mundo humano.',
+      'title': '江城子·乙卯正月二十日夜记梦',
+      'es': 'Un sueño recordado',
     },
     {
-      'zh': '转朱阁，低绮户，照无眠。',
-      'es':
-          'La luna gira sobre el pabellón rojo, baja hasta la ventana y alumbra a quien no duerme.',
+      'title': '蝶恋花·春景',
+      'es': 'Mariposas enamoradas · Primavera',
     },
     {
-      'zh': '不应有恨，何事长向别时圆？',
-      'es':
-          'No debería guardar rencor; ¿por qué está siempre llena cuando estamos separados?',
+      'title': '浣溪沙·游蕲水清泉寺',
+      'es': 'Visitando el templo Qingquan',
     },
     {
-      'zh': '人有悲欢离合，月有阴晴圆缺，此事古难全。',
-      'es':
-          'Las personas conocen alegría y tristeza, encuentros y despedidas; la luna crece y mengua.',
+      'title': '题西林壁',
+      'es': 'Escrito en el muro del templo Xilin',
     },
     {
-      'zh': '但愿人长久，千里共婵娟。',
-      'es':
-          'Deseo que vivamos muchos años y compartamos la belleza de la luna aunque estemos lejos.',
+      'title': '饮湖上初晴后雨',
+      'es': 'Bebiendo junto al lago después de la lluvia',
+    },
+    {
+      'title': '惠崇春江晚景',
+      'es': 'Escena primaveral junto al río',
     },
   ];
 
-  Future<void> speakLine(
-    String chinese,
-    String spanish,
-  ) async {
-    await flutterTts.stop();
-    await flutterTts.awaitSpeakCompletion(true);
-
-    await flutterTts.setLanguage('zh-CN');
-    await flutterTts.setSpeechRate(0.42);
-    await flutterTts.speak(chinese);
-
-    await flutterTts.setLanguage('es-ES');
-    await flutterTts.setSpeechRate(0.45);
-    await flutterTts.speak(spanish);
-  }
-
   @override
-  void dispose() {
-    flutterTts.stop();
-    super.dispose();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Column(
+          children: [
+            Text(
+              '选诗',
+              style: TextStyle(
+                fontSize: 19,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              'Elegir poema',
+              style: TextStyle(fontSize: 11),
+            ),
+          ],
+        ),
+      ),
+      body: ListView.separated(
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 28),
+        itemCount: poems.length,
+        separatorBuilder: (_, __) => const SizedBox(height: 8),
+        itemBuilder: (context, index) {
+          final poem = poems[index];
+          final available = index == 0;
+
+          return Card(
+            elevation: 0,
+            child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 7,
+              ),
+              leading: CircleAvatar(
+                child: Text('${index + 1}'),
+              ),
+              title: Text(
+                poem['title']!,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              subtitle: Padding(
+                padding: const EdgeInsets.only(top: 3),
+                child: Text(
+                  available
+                      ? poem['es']!
+                      : '${poem['es']} · 即将开放',
+                  style: const TextStyle(fontSize: 12),
+                ),
+              ),
+              trailing: Icon(
+                available
+                    ? Icons.chevron_right
+                    : Icons.lock_outline,
+                size: 21,
+              ),
+              onTap: available
+                  ? () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const StudyPage(),
+                        ),
+                      );
+                    }
+                  : null,
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+// ==================================================
+// 学习页面
+// ==================================================
+
+class StudyPage extends StatelessWidget {
+  const StudyPage({super.key});
+
+  Widget learningCard({
+    required BuildContext context,
+    required IconData icon,
+    required String title,
+    required String spanish,
+    required Color color,
+    required Widget page,
+  }) {
+    return Card(
+      elevation: 0,
+      color: color,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => page),
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 18,
+            vertical: 20,
+          ),
+          child: Row(
+            children: [
+              Icon(icon, size: 34),
+              const SizedBox(width: 18),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      spanish,
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(Icons.chevron_right),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final bool correct =
-        checked && selectedAnswer == correctAnswer;
-
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          '水调歌头',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
+      appBar: AppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(
-            16,
-            6,
-            16,
-            28,
-          ),
+          padding: const EdgeInsets.fromLTRB(18, 0, 18, 28),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Text(
-                '苏轼 · Su Shi',
-                textAlign: TextAlign.center,
+                '《水调歌头》',
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 27,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 4),
+              const Text(
+                '明月几时有',
+                style: TextStyle(
+                  fontSize: 14,
                   color: Colors.black54,
                 ),
               ),
-
-              const SizedBox(height: 16),
-
-              Card(
-                elevation: 0,
-                clipBehavior: Clip.antiAlias,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) =>
-                            const ReadingPage(),
-                      ),
-                    );
-                  },
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 100,
-                        height: 92,
-                        child: Image.asset(
-                          readingImage,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      const Expanded(
-                        child: ListTile(
-                          title: Text(
-                            '阅读',
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          subtitle: Text(
-                            'Lectura · 全词朗读',
-                            style: TextStyle(fontSize: 12),
-                          ),
-                          trailing:
-                              Icon(Icons.chevron_right),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 18),
-
+              const SizedBox(height: 4),
               const Text(
-                '逐句听 · Escucha frase por frase',
+                'Su Shi · 苏轼',
                 style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 12,
+                  color: Colors.black45,
                 ),
               ),
+              const SizedBox(height: 24),
 
-              const SizedBox(height: 8),
-
-              ...poemLines.map(
-                (line) => Card(
-                  elevation: 0,
-                  margin:
-                      const EdgeInsets.only(bottom: 8),
-                  child: ListTile(
-                    contentPadding:
-                        const EdgeInsets.fromLTRB(
-                      14,
-                      6,
-                      6,
-                      6,
-                    ),
-                    title: Text(
-                      line['zh']!,
-                      style:
-                          const TextStyle(fontSize: 16),
-                    ),
-                    subtitle: Padding(
-                      padding:
-                          const EdgeInsets.only(top: 4),
-                      child: Text(
-                        line['es']!,
-                        style:
-                            const TextStyle(fontSize: 12),
-                      ),
-                    ),
-                    trailing: IconButton(
-                      icon: const Icon(
-                        Icons.volume_up_rounded,
-                      ),
-                      onPressed: () {
-                        speakLine(
-                          line['zh']!,
-                          line['es']!,
-                        );
-                      },
-                    ),
-                  ),
-                ),
+              learningCard(
+                context: context,
+                icon: Icons.menu_book_rounded,
+                title: '阅读',
+                spanish: 'Lectura · 欣赏诗词，动画朗读',
+                color: const Color(0xFFF6DED3),
+                page: const ReadingPage(),
               ),
 
-              const SizedBox(height: 18),
+              const SizedBox(height: 10),
 
-              const Text(
-                '填空练习 · Completa',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                ),
+              learningCard(
+                context: context,
+                icon: Icons.headphones_rounded,
+                title: '跟读',
+                spanish: 'Repetición · 逐句朗读，中西对照',
+                color: const Color(0xFFDDECEF),
+                page: const FollowReadingPage(),
               ),
 
-              const SizedBox(height: 8),
+              const SizedBox(height: 10),
 
-              Card(
-                elevation: 0,
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    children: [
-                      const Text(
-                        '明月几时有？',
-                        style: TextStyle(fontSize: 17),
-                      ),
-
-                      const SizedBox(height: 8),
-
-                      Text(
-                        '把酒问 ${selectedAnswer ?? '____'}。',
-                        style: const TextStyle(
-                          fontSize: 19,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-
-                      const SizedBox(height: 14),
-
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: [
-                          '青天',
-                          '明月',
-                          '东风',
-                        ].map((answer) {
-                          return ChoiceChip(
-                            label: Text(answer),
-                            selected:
-                                selectedAnswer == answer,
-                            onSelected: (_) {
-                              setState(() {
-                                selectedAnswer = answer;
-                                checked = false;
-                              });
-                            },
-                          );
-                        }).toList(),
-                      ),
-
-                      const SizedBox(height: 14),
-
-                      SizedBox(
-                        width: double.infinity,
-                        child: FilledButton(
-                          onPressed:
-                              selectedAnswer == null
-                                  ? null
-                                  : () {
-                                      setState(() {
-                                        checked = true;
-                                      });
-                                    },
-                          child: const Text(
-                            '检查答案 · Comprobar',
-                          ),
-                        ),
-                      ),
-
-                      if (checked) ...[
-                        const SizedBox(height: 10),
-                        Text(
-                          correct
-                              ? '👏 回答正确！¡Muy bien!'
-                              : '再试一次 · Inténtalo de nuevo',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: correct
-                                ? Colors.green
-                                : Colors.red,
-                          ),
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
+              learningCard(
+                context: context,
+                icon: Icons.edit_rounded,
+                title: '填空练习',
+                spanish: 'Completar · 趣味练习，巩固记忆',
+                color: const Color(0xFFF9E7CA),
+                page: const QuizPage(),
               ),
             ],
           ),
@@ -427,23 +363,23 @@ class _StudyPageState extends State<StudyPage> {
   }
 }
 
-// ==================== 全词阅读页 ====================
+// ==================================================
+// 阅读页面
+// ==================================================
 
 class ReadingPage extends StatefulWidget {
   const ReadingPage({super.key});
 
   @override
-  State<ReadingPage> createState() =>
-      _ReadingPageState();
+  State<ReadingPage> createState() => _ReadingPageState();
 }
 
 class _ReadingPageState extends State<ReadingPage>
     with SingleTickerProviderStateMixin {
-  final FlutterTts flutterTts = FlutterTts();
+  final FlutterTts tts = FlutterTts();
 
-  late AnimationController animationController;
+  late AnimationController controller;
   late Animation<double> scaleAnimation;
-  late Animation<Offset> moveAnimation;
 
   final String poem =
       '明月几时有？\n'
@@ -464,57 +400,42 @@ class _ReadingPageState extends State<ReadingPage>
   void initState() {
     super.initState();
 
-    animationController = AnimationController(
+    controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 35),
+      duration: const Duration(seconds: 8),
     );
 
     scaleAnimation = Tween<double>(
       begin: 1.0,
-      end: 1.12,
+      end: 1.18,
     ).animate(
       CurvedAnimation(
-        parent: animationController,
+        parent: controller,
         curve: Curves.easeInOut,
       ),
     );
 
-    moveAnimation = Tween<Offset>(
-      begin: const Offset(-0.015, 0),
-      end: const Offset(0.025, -0.015),
-    ).animate(
-      CurvedAnimation(
-        parent: animationController,
-        curve: Curves.easeInOut,
-      ),
-    );
-
-    animationController.repeat(
-      reverse: true,
-    );
+    controller.repeat(reverse: true);
 
     startReading();
   }
 
   Future<void> startReading() async {
-    await Future.delayed(
-      const Duration(milliseconds: 700),
-    );
+    await Future.delayed(const Duration(milliseconds: 600));
 
-    await flutterTts.stop();
-    await flutterTts.setLanguage('zh-CN');
-    await flutterTts.setSpeechRate(0.38);
-    await flutterTts.awaitSpeakCompletion(true);
+    if (!mounted) return;
 
-    final speaking = flutterTts.speak(
-      poem.replaceAll('\n', ' '),
-    );
+    await tts.setLanguage('zh-CN');
+    await tts.setSpeechRate(0.38);
+    await tts.awaitSpeakCompletion(true);
+
+    tts.speak(poem.replaceAll('\n', ' '));
 
     for (int i = 1; i <= poem.length; i++) {
       if (!mounted) return;
 
       await Future.delayed(
-        const Duration(milliseconds: 300),
+        const Duration(milliseconds: 270),
       );
 
       if (mounted) {
@@ -523,56 +444,29 @@ class _ReadingPageState extends State<ReadingPage>
         });
       }
     }
-
-    await speaking;
-
-    if (!mounted) return;
-
-    await Future.delayed(
-      const Duration(milliseconds: 1200),
-    );
-
-    if (mounted) {
-      Navigator.pop(context);
-    }
   }
 
   @override
   void dispose() {
-    flutterTts.stop();
-    animationController.dispose();
+    tts.stop();
+    controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final int count =
-        visibleCharacters.clamp(0, poem.length);
-
-    final String shown =
-        poem.substring(0, count);
+    final count = visibleCharacters.clamp(0, poem.length);
 
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
         fit: StackFit.expand,
         children: [
-          ClipRect(
-            child: AnimatedBuilder(
-              animation: animationController,
-              builder: (context, child) {
-                return SlideTransition(
-                  position: moveAnimation,
-                  child: ScaleTransition(
-                    scale: scaleAnimation,
-                    child: child,
-                  ),
-                );
-              },
-              child: Image.asset(
-                readingImage,
-                fit: BoxFit.cover,
-              ),
+          ScaleTransition(
+            scale: scaleAnimation,
+            child: Image.asset(
+              readingImage,
+              fit: BoxFit.cover,
             ),
           ),
 
@@ -583,7 +477,7 @@ class _ReadingPageState extends State<ReadingPage>
                 end: Alignment.bottomCenter,
                 colors: [
                   Color(0x11000000),
-                  Color(0x33000000),
+                  Color(0x44000000),
                   Color(0xCC000000),
                 ],
               ),
@@ -593,69 +487,567 @@ class _ReadingPageState extends State<ReadingPage>
           SafeArea(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
-                  child: Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: const Icon(
-                          Icons.close,
-                          color: Colors.white,
-                        ),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.white,
                       ),
-                      const Spacer(),
-                      const Text(
-                        '水调歌头 · 阅读',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                        ),
+                    ),
+                    const Expanded(
+                      child: Column(
+                        children: [
+                          Text(
+                            '阅读',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            'Lectura',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 11,
+                            ),
+                          ),
+                        ],
                       ),
-                      const Spacer(),
-                      const SizedBox(width: 48),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(width: 48),
+                  ],
                 ),
 
                 const Spacer(),
 
                 Container(
                   width: double.infinity,
-                  constraints: const BoxConstraints(
-                    maxHeight: 410,
-                  ),
+                  constraints: const BoxConstraints(maxHeight: 410),
                   margin: const EdgeInsets.all(16),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.black.withValues(
-                      alpha: 0.54,
-                    ),
-                    borderRadius: BorderRadius.circular(24),
+                    color: Colors.black.withValues(alpha: 0.56),
+                    borderRadius: BorderRadius.circular(22),
                   ),
                   child: SingleChildScrollView(
                     reverse: true,
                     child: Text(
-                      shown,
+                      poem.substring(0, count),
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 17,
+                        fontSize: 16,
                         height: 1.65,
-                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
                 ),
-
-                const SizedBox(height: 8),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ==================================================
+// 跟读页面
+// ==================================================
+
+class FollowReadingPage extends StatefulWidget {
+  const FollowReadingPage({super.key});
+
+  @override
+  State<FollowReadingPage> createState() =>
+      _FollowReadingPageState();
+}
+
+class _FollowReadingPageState extends State<FollowReadingPage> {
+  final FlutterTts tts = FlutterTts();
+
+  final List<Map<String, String>> lines = const [
+    {
+      'zh': '明月几时有？',
+      'py': 'Míng yuè jǐ shí yǒu?',
+      'es': '¿Cuándo apareció la luna brillante?',
+    },
+    {
+      'zh': '把酒问青天。',
+      'py': 'Bǎ jiǔ wèn qīng tiān.',
+      'es': 'Alzo mi copa y pregunto al cielo.',
+    },
+    {
+      'zh': '不知天上宫阙，今夕是何年。',
+      'py': 'Bù zhī tiān shàng gōng què, jīn xī shì hé nián.',
+      'es': 'No sé qué año será esta noche en el palacio celestial.',
+    },
+    {
+      'zh': '我欲乘风归去，又恐琼楼玉宇，高处不胜寒。',
+      'py': 'Wǒ yù chéng fēng guī qù, yòu kǒng qióng lóu yù yǔ, gāo chù bù shèng hán.',
+      'es': 'Quisiera volver con el viento, pero temo el frío de los palacios celestiales.',
+    },
+    {
+      'zh': '起舞弄清影，何似在人间。',
+      'py': 'Qǐ wǔ nòng qīng yǐng, hé sì zài rén jiān.',
+      'es': 'Bailo con mi sombra clara; nada se compara con el mundo humano.',
+    },
+    {
+      'zh': '转朱阁，低绮户，照无眠。',
+      'py': 'Zhuǎn zhū gé, dī qǐ hù, zhào wú mián.',
+      'es': 'La luna gira sobre el pabellón rojo y alumbra a quien no duerme.',
+    },
+    {
+      'zh': '不应有恨，何事长向别时圆？',
+      'py': 'Bù yīng yǒu hèn, hé shì cháng xiàng bié shí yuán?',
+      'es': '¿Por qué está siempre llena cuando estamos separados?',
+    },
+    {
+      'zh': '人有悲欢离合，月有阴晴圆缺，此事古难全。',
+      'py': 'Rén yǒu bēi huān lí hé, yuè yǒu yīn qíng yuán quē, cǐ shì gǔ nán quán.',
+      'es': 'Las personas tienen encuentros y despedidas; la luna crece y mengua.',
+    },
+    {
+      'zh': '但愿人长久，千里共婵娟。',
+      'py': 'Dàn yuàn rén cháng jiǔ, qiān lǐ gòng chán juān.',
+      'es': 'Deseo que vivamos muchos años y compartamos la misma luna.',
+    },
+  ];
+
+  Future<void> speak(String text) async {
+    await tts.stop();
+    await tts.setLanguage('zh-CN');
+    await tts.setSpeechRate(0.38);
+    await tts.speak(text);
+  }
+
+  @override
+  void dispose() {
+    tts.stop();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Column(
+          children: [
+            Text(
+              '跟读',
+              style: TextStyle(fontSize: 18),
+            ),
+            Text(
+              'Repetición',
+              style: TextStyle(fontSize: 11),
+            ),
+          ],
+        ),
+      ),
+      body: ListView.separated(
+        padding: const EdgeInsets.fromLTRB(18, 12, 18, 30),
+        itemCount: lines.length,
+        separatorBuilder: (_, __) => const Divider(height: 26),
+        itemBuilder: (context, index) {
+          final line = lines[index];
+
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      line['zh']!,
+                      style: const TextStyle(
+                        fontSize: 19,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      line['py']!,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: Colors.black45,
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      line['es']!,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              IconButton(
+                onPressed: () => speak(line['zh']!),
+                icon: const Icon(
+                  Icons.volume_up_rounded,
+                  color: Colors.blue,
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+// ==================================================
+// 填空页面
+// ==================================================
+
+class QuizPage extends StatefulWidget {
+  const QuizPage({super.key});
+
+  @override
+  State<QuizPage> createState() => _QuizPageState();
+}
+
+class _QuizPageState extends State<QuizPage> {
+  int questionIndex = 0;
+  String? selectedAnswer;
+  bool answeredCorrectly = false;
+
+  final List<Map<String, dynamic>> questions = [
+    {
+      'question': '明月 ____ 时有？',
+      'es': 'Completa la palabra que falta.',
+      'answer': '几',
+      'choices': ['几', '何', '已'],
+    },
+    {
+      'question': '把酒问 ____ 。',
+      'es': 'Completa el verso.',
+      'answer': '青天',
+      'choices': ['青天', '明月', '东风'],
+    },
+    {
+      'question': '不知天上 ____ 。',
+      'es': 'Completa el verso.',
+      'answer': '宫阙',
+      'choices': ['宫阙', '人间', '明月'],
+    },
+    {
+      'question': '今夕是 ____ 。',
+      'es': 'Completa el verso.',
+      'answer': '何年',
+      'choices': ['何年', '何处', '何人'],
+    },
+    {
+      'question': '我欲乘 ____ 归去。',
+      'es': 'Completa el verso.',
+      'answer': '风',
+      'choices': ['风', '月', '云'],
+    },
+    {
+      'question': '高处不胜 ____ 。',
+      'es': 'Completa el verso.',
+      'answer': '寒',
+      'choices': ['寒', '暖', '风'],
+    },
+    {
+      'question': '何似在 ____ 。',
+      'es': 'Completa el verso.',
+      'answer': '人间',
+      'choices': ['人间', '天上', '梦中'],
+    },
+    {
+      'question': '月有阴晴 ____ 。',
+      'es': 'Completa el verso.',
+      'answer': '圆缺',
+      'choices': ['圆缺', '离合', '悲欢'],
+    },
+    {
+      'question': '千里共 ____ 。',
+      'es': 'Completa最后一句。',
+      'answer': '婵娟',
+      'choices': ['婵娟', '明月', '清影'],
+    },
+  ];
+
+  Future<void> chooseAnswer(String answer) async {
+    final correct =
+        answer == questions[questionIndex]['answer'];
+
+    setState(() {
+      selectedAnswer = answer;
+      answeredCorrectly = correct;
+    });
+
+    if (!correct) {
+      return;
+    }
+
+    await Future.delayed(
+      const Duration(milliseconds: 800),
+    );
+
+    if (!mounted) return;
+
+    if (questionIndex < questions.length - 1) {
+      setState(() {
+        questionIndex++;
+        selectedAnswer = null;
+        answeredCorrectly = false;
+      });
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const CompletionPage(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final question = questions[questionIndex];
+    final progress = (questionIndex + 1) / questions.length;
+
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Column(
+          children: [
+            Text(
+              '填空练习',
+              style: TextStyle(fontSize: 18),
+            ),
+            Text(
+              'Completar',
+              style: TextStyle(fontSize: 11),
+            ),
+          ],
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 14),
+            child: Center(
+              child: Text(
+                '${questionIndex + 1}/${questions.length}',
+                style: const TextStyle(fontSize: 13),
+              ),
+            ),
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(22),
+          child: Column(
+            children: [
+              LinearProgressIndicator(
+                value: progress,
+                minHeight: 7,
+                borderRadius: BorderRadius.circular(10),
+              ),
+
+              const Spacer(),
+
+              Text(
+                question['question'],
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 27,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+
+              const SizedBox(height: 10),
+
+              Text(
+                question['es'],
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: Colors.black54,
+                ),
+              ),
+
+              const SizedBox(height: 38),
+
+              Wrap(
+                spacing: 12,
+                runSpacing: 12,
+                alignment: WrapAlignment.center,
+                children:
+                    (question['choices'] as List<String>).map(
+                  (answer) {
+                    final selected =
+                        selectedAnswer == answer;
+
+                    return SizedBox(
+                      width: 92,
+                      height: 54,
+                      child: FilledButton.tonal(
+                        onPressed: answeredCorrectly
+                            ? null
+                            : () => chooseAnswer(answer),
+                        style: FilledButton.styleFrom(
+                          backgroundColor:
+                              selected && answeredCorrectly
+                                  ? Colors.green.shade200
+                                  : null,
+                        ),
+                        child: Text(
+                          answer,
+                          style: const TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ).toList(),
+              ),
+
+              const SizedBox(height: 28),
+
+              if (selectedAnswer != null)
+                Text(
+                  answeredCorrectly
+                      ? '✓ 答对了！ · ¡Correcto!'
+                      : '再试一次 · Inténtalo de nuevo',
+                  style: TextStyle(
+                    color: answeredCorrectly
+                        ? Colors.green
+                        : Colors.red,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+              const Spacer(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ==================================================
+// 完成页面
+// ==================================================
+
+class CompletionPage extends StatefulWidget {
+  const CompletionPage({super.key});
+
+  @override
+  State<CompletionPage> createState() =>
+      _CompletionPageState();
+}
+
+class _CompletionPageState extends State<CompletionPage> {
+  int seconds = 3;
+
+  @override
+  void initState() {
+    super.initState();
+    returnToSelection();
+  }
+
+  Future<void> returnToSelection() async {
+    for (int i = 3; i > 0; i--) {
+      if (!mounted) return;
+
+      setState(() {
+        seconds = i;
+      });
+
+      await Future.delayed(const Duration(seconds: 1));
+    }
+
+    if (!mounted) return;
+
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(
+        builder: (_) => const PoemSelectionPage(),
+      ),
+      (route) => route.isFirst,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset(
+            readingImage,
+            fit: BoxFit.cover,
+          ),
+          Container(
+            color: Colors.indigo.withValues(alpha: 0.72),
+          ),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(28),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    '🎉',
+                    style: TextStyle(fontSize: 72),
+                  ),
+                  const SizedBox(height: 18),
+                  const Text(
+                    '太棒了！',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 38,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    '¡Excelente!',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                    ),
+                  ),
+                  const SizedBox(height: 22),
+                  const Text(
+                    '你已经完成《水调歌头》的全部填空练习！',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  const Text(
+                    'Has completado todos los ejercicios.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+                  Text(
+                    '$seconds 秒后返回选诗页\nVolverás a elegir otro poema.',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.white70,
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
