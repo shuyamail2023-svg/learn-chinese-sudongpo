@@ -682,12 +682,48 @@ class _FollowReadingPageState extends State<FollowReadingPage> {
     },
   ];
 
-  Future<void> speak(String text) async {
-    await tts.stop();
-    await tts.setLanguage('zh-CN');
-    await tts.setSpeechRate(0.38);
-    await tts.speak(text);
+Future<void> speak(String text) async {
+  await tts.stop();
+
+  await tts.setLanguage('zh-CN');
+  await tts.setSpeechRate(0.36);
+  await tts.setPitch(0.88);
+
+  final voices = await tts.getVoices;
+
+  if (voices != null) {
+    final chineseVoices = List<Map>.from(voices).where((voice) {
+      final locale =
+          (voice['locale'] ?? '').toString().toLowerCase();
+
+      return locale.startsWith('zh');
+    }).toList();
+
+    if (chineseVoices.isNotEmpty) {
+      Map selectedVoice = chineseVoices.first;
+
+      // 优先寻找较低沉的中文声音
+      for (final voice in chineseVoices) {
+        final name =
+            (voice['name'] ?? '').toString().toLowerCase();
+
+        if (name.contains('yunyang') ||
+            name.contains('yunxi') ||
+            name.contains('male')) {
+          selectedVoice = voice;
+          break;
+        }
+      }
+
+      await tts.setVoice({
+        'name': selectedVoice['name'].toString(),
+        'locale': selectedVoice['locale'].toString(),
+      });
+    }
   }
+
+  await tts.speak(text);
+}
 
   @override
   void dispose() {
