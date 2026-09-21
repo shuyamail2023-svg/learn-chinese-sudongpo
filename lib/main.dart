@@ -172,9 +172,9 @@ class PoemSelectionPage extends StatelessWidget {
         ),
       ),
       body: ListView.separated(
-        padding: const EdgeInsets.fromLTRB(16, 12, 16, 28),
+        padding: const EdgeInsets.fromLTRB(12, 4, 12, 6),
         itemCount: poems.length,
-        separatorBuilder: (_, __) => const SizedBox(height: 8),
+        separatorBuilder: (_, __) => const SizedBox(height: 2),
         itemBuilder: (context, index) {
           final poem = poems[index];
           final available = index == 0;
@@ -184,7 +184,7 @@ class PoemSelectionPage extends StatelessWidget {
             child: ListTile(
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 16,
-                vertical: 7,
+                vertical: 0,
               ),
               leading: CircleAvatar(
                 child: Text('${index + 1}'),
