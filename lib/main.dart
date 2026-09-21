@@ -1080,7 +1080,7 @@ class CompletionPage extends StatelessWidget {
   void goBackToStudy(BuildContext context) {
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (_) => const StudyPage(),
+        builder: (_) => const StudyPage(poemIndex: 0),
       ),
       (route) => route.isFirst,
     );
