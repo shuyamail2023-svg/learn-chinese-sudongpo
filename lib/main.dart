@@ -582,6 +582,20 @@ class _ReadingPageState extends State<ReadingPage>
                         ],
                       ),
                     ),
+                    IconButton(
+  onPressed: () async {
+    await tts.stop();
+    await tts.setLanguage('zh-CN');
+    await tts.setSpeechRate(0.38);
+    await tts.speak(poem.replaceAll('\n', ' '));
+  },
+  icon: const Icon(
+    Icons.volume_up_rounded,
+    color: Colors.white,
+    size: 28,
+  ),
+  tooltip: '朗读',
+),
                     const SizedBox(width: 48),
                   ],
                 ),
