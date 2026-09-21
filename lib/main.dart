@@ -1038,39 +1038,22 @@ class _QuizPageState extends State<QuizPage> {
 // 完成页面
 // ==================================================
 
-class CompletionPage extends StatefulWidget {
+class CompletionPage extends StatelessWidget {
   const CompletionPage({super.key});
 
-  @override
-  State<CompletionPage> createState() =>
-      _CompletionPageState();
-}
-
-class _CompletionPageState extends State<CompletionPage> {
-  int seconds = 3;
-
-  @override
-  void initState() {
-    super.initState();
-    returnToSelection();
-  }
-
-  Future<void> returnToSelection() async {
-    for (int i = 3; i > 0; i--) {
-      if (!mounted) return;
-
-      setState(() {
-        seconds = i;
-      });
-
-      await Future.delayed(const Duration(seconds: 1));
-    }
-
-    if (!mounted) return;
-
+  void goToPoemSelection(BuildContext context) {
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (_) => const PoemSelectionPage(),
+      ),
+      (route) => route.isFirst,
+    );
+  }
+
+  void goBackToStudy(BuildContext context) {
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(
+        builder: (_) => const StudyPage(),
       ),
       (route) => route.isFirst,
     );
@@ -1086,29 +1069,34 @@ class _CompletionPageState extends State<CompletionPage> {
             readingImage,
             fit: BoxFit.cover,
           ),
+
           Container(
-            color: Colors.indigo.withValues(alpha: 0.72),
+            color: Colors.indigo.withValues(alpha: 0.58),
           ),
+
           SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(28),
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(24, 28, 24, 28),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    '🎉',
-                    style: TextStyle(fontSize: 72),
+                    '🎆   ✨   🎆',
+                    style: TextStyle(fontSize: 30),
                   ),
-                  const SizedBox(height: 18),
+
+                  const SizedBox(height: 10),
+
                   const Text(
                     '太棒了！',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 38,
+                      color: Color(0xFFFFE59A),
+                      fontSize: 42,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 10),
+
+                  const SizedBox(height: 8),
+
                   const Text(
                     '¡Excelente!',
                     style: TextStyle(
@@ -1116,16 +1104,21 @@ class _CompletionPageState extends State<CompletionPage> {
                       fontSize: 24,
                     ),
                   ),
-                  const SizedBox(height: 22),
+
+                  const SizedBox(height: 14),
+
                   const Text(
-                    '你已经完成《水调歌头》的全部填空练习！',
+                    '你已经完成《水调歌头》的全部练习！',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 16,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: 6),
+
+                  const SizedBox(height: 5),
+
                   const Text(
                     'Has completado todos los ejercicios.',
                     textAlign: TextAlign.center,
@@ -1134,13 +1127,111 @@ class _CompletionPageState extends State<CompletionPage> {
                       fontSize: 14,
                     ),
                   ),
-                  const SizedBox(height: 32),
-                  Text(
-                    '$seconds 秒后返回选诗页\nVolverás a elegir otro poema.',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white70,
-                      fontSize: 13,
+
+                  const SizedBox(height: 30),
+
+                  Container(
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.92),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Text(
+                                '⭐',
+                                style: TextStyle(fontSize: 25),
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                '正确率',
+                                style: TextStyle(fontSize: 15),
+                              ),
+                              Text(
+                                '100%',
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: 75,
+                          child: VerticalDivider(),
+                        ),
+
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Text(
+                                '🕒',
+                                style: TextStyle(fontSize: 25),
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                '完成',
+                                style: TextStyle(fontSize: 15),
+                              ),
+                              Text(
+                                '完成！',
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 28),
+
+                  SizedBox(
+                    width: double.infinity,
+                    height: 54,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        goToPoemSelection(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF287ED8),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(28),
+                        ),
+                      ),
+                      child: const Text(
+                        '再学一首  ·  Elegir otro poema',
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 14),
+
+                  TextButton(
+                    onPressed: () {
+                      goBackToStudy(context);
+                    },
+                    child: const Text(
+                      '返回学习页面  ·  Volver al estudio',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
                     ),
                   ),
                 ],
