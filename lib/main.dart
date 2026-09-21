@@ -181,7 +181,7 @@ class PoemSelectionPage extends StatelessWidget {
               itemCount: poems.length,
               itemBuilder: (context, index) {
                 final poem = poems[index];
-                final available = index == 0;
+                final available = index <= 1;
 
                 // 自动根据手机高度平均分配给10首诗
                 final itemHeight =
