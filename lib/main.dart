@@ -103,7 +103,6 @@ class HomePage extends StatelessWidget {
 // ==================================================
 // 选诗页面
 // ==================================================
-
 class PoemSelectionPage extends StatelessWidget {
   const PoemSelectionPage({super.key});
 
@@ -154,80 +153,146 @@ class PoemSelectionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 54,
         centerTitle: true,
         title: const Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               '选诗',
               style: TextStyle(
-                fontSize: 19,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
               'Elegir poema',
-              style: TextStyle(fontSize: 11),
+              style: TextStyle(fontSize: 10),
             ),
           ],
         ),
       ),
-      body: ListView.separated(
-        padding: const EdgeInsets.fromLTRB(12, 4, 12, 6),
-        itemCount: poems.length,
-        separatorBuilder: (_, __) => const SizedBox(height: 2),
-        itemBuilder: (context, index) {
-          final poem = poems[index];
-          final available = index == 0;
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return ListView.builder(
+              padding: const EdgeInsets.fromLTRB(10, 3, 10, 3),
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: poems.length,
+              itemBuilder: (context, index) {
+                final poem = poems[index];
+                final available = index == 0;
 
-          return Card(
-            elevation: 0,
-            child: ListTile(
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 0,
-              ),
-              leading: CircleAvatar(
-                child: Text('${index + 1}'),
-              ),
-              title: Text(
-                poem['title']!,
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              subtitle: Padding(
-                padding: const EdgeInsets.only(top: 3),
-                child: Text(
-                  available
-                      ? poem['es']!
-                      : '${poem['es']} · 即将开放',
-                  style: const TextStyle(fontSize: 12),
-                ),
-              ),
-              trailing: Icon(
-                available
-                    ? Icons.chevron_right
-                    : Icons.lock_outline,
-                size: 21,
-              ),
-              onTap: available
-                  ? () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const StudyPage(),
+                // 自动根据手机高度平均分配给10首诗
+                final itemHeight =
+                    (constraints.maxHeight - 6) / poems.length;
+
+                return SizedBox(
+                  height: itemHeight,
+                  child: Card(
+                    elevation: 0,
+                    margin: const EdgeInsets.symmetric(
+                      vertical: 1.5,
+                    ),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(12),
+                      onTap: available
+                          ? () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) =>
+                                      const StudyPage(),
+                                ),
+                              );
+                            }
+                          : null,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
                         ),
-                      );
-                    }
-                  : null,
-            ),
-          );
-        },
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 34,
+                              height: 34,
+                              alignment: Alignment.center,
+                              decoration: const BoxDecoration(
+                                color: Color(0xFFFFDCC8),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Text(
+                                '${index + 1}',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(width: 10),
+
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.center,
+                                crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    poem['title']!,
+                                    maxLines: 1,
+                                    overflow:
+                                        TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight:
+                                          FontWeight.w600,
+                                      height: 1.05,
+                                    ),
+                                  ),
+
+                                  const SizedBox(height: 3),
+
+                                  Text(
+                                    poem['es']!,
+                                    maxLines: 1,
+                                    overflow:
+                                        TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontSize: 10.5,
+                                      color: Colors.black54,
+                                      height: 1.05,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            const SizedBox(width: 5),
+
+                            Icon(
+                              available
+                                  ? Icons.chevron_right
+                                  : Icons.lock_outline,
+                              size: 18,
+                              color: Colors.black54,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }
 }
+
 
 // ==================================================
 // 学习页面
