@@ -1,4 +1,4 @@
-name: learn_chinese_sudongpo
+gname: learn_chinese_sudongpo
 description: 学中文·苏东坡 V0.8
 publish_to: 'none'
 version: 0.8.0+8
@@ -23,5 +23,5 @@ flutter:
     - 55A50A20-27AF-491F-B737-712C4A461847.png
     - 9869CB58-6C3C-4D8F-8693-CB3BF04B0F62.png
     - 16F1DCC9-0A88-4597-ADC5-1B7B5EBE3A65.png
-    - 1BECDCFB-224B-4565-A58D-8B2A591E9E21.png
+  
     - 72662586-3399-4E22-B9C3-75EE46301453.png
