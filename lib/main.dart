@@ -1066,7 +1066,7 @@ class CompletionPage extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Image.asset(
-            'D5F5EAD4-74A3-44B1-B457-0ED596533F44.png',
+            7241CC18-F9EC-43BE-BB04-A29E72E37882.png,
             fit: BoxFit.cover,
           ),
 
