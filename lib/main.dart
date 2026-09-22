@@ -957,7 +957,37 @@ class _QuizPageState extends State<QuizPage> {
   'answer': '卷起千堆雪',
   'choices': ['卷起千堆雪', '浪淘尽', '江山如画'],
 },
-  ];
+  {
+  'question': '江山如画，____。',
+  'es': 'Completa el verso.',
+  'answer': '一时多少豪杰',
+  'choices': ['一时多少豪杰', '千古风流人物', '卷起千堆雪'],
+},
+{
+  'question': '遥想公瑾当年，____，雄姿英发。',
+  'es': 'Completa el verso.',
+  'answer': '小乔初嫁了',
+  'choices': ['小乔初嫁了', '羽扇纶巾', '早生华发'],
+},
+{
+  'question': '羽扇纶巾，谈笑间，____。',
+  'es': 'Completa el verso.',
+  'answer': '樯橹灰飞烟灭',
+  'choices': ['樯橹灰飞烟灭', '惊涛拍岸', '一时多少豪杰'],
+},
+{
+  'question': '故国神游，多情应笑我，____。',
+  'es': 'Completa el verso.',
+  'answer': '早生华发',
+  'choices': ['早生华发', '雄姿英发', '千堆雪'],
+},
+{
+  'question': '人生如梦，____。',
+  'es': 'Completa el último verso.',
+  'answer': '一尊还酹江月',
+  'choices': ['一尊还酹江月', '千古风流人物', '江山如画'],
+},
+];
   Future<void> chooseAnswer(String answer) async {
     final correct =
         answer == questions[questionIndex]['answer'];
