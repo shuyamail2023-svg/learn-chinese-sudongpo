@@ -766,7 +766,27 @@ class _FollowReadingPageState extends State<FollowReadingPage> {
   'py': 'Rén shēng rú mèng, yī zūn huán lèi jiāng yuè.',
   'es': 'La vida es como un sueño; alzo una copa y la ofrezco a la luna sobre el río.',
 },
-    ];
+        {
+      'zh': '莫听穿林打叶声，何妨吟啸且徐行。',
+      'py': 'Mò tīng chuān lín dǎ yè shēng, hé fáng yín xiào qiě xú xíng.',
+      'es': 'No escuches el sonido de la lluvia golpeando las hojas; ¿por qué no caminar despacio, cantando con calma?',
+    },
+    {
+      'zh': '竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。',
+      'py': 'Zhú zhàng máng xié qīng shèng mǎ, shuí pà? Yī suō yān yǔ rèn píng shēng.',
+      'es': 'Con bastón de bambú y sandalias de paja camino más ligero que a caballo. ¿Qué hay que temer? Afronto la lluvia toda mi vida.',
+    },
+    {
+      'zh': '料峭春风吹酒醒，微冷，山头斜照却相迎。',
+      'py': 'Liào qiào chūn fēng chuī jiǔ xǐng, wēi lěng, shān tóu xié zhào què xiāng yíng.',
+      'es': 'El frío viento de primavera me despierta del vino; siento un poco de frío, pero el sol poniente sobre la montaña viene a recibirme.',
+    },
+    {
+      'zh': '回首向来萧瑟处，归去，也无风雨也无晴。',
+      'py': 'Huí shǒu xiàng lái xiāo sè chù, guī qù, yě wú fēng yǔ yě wú qíng.',
+      'es': 'Miro hacia atrás al lugar azotado por el viento y la lluvia; regreso: ya no hay tormenta ni cielo despejado.',
+    },
+  ];
 Future<void> speak(String text) async {
   await tts.stop();
   await tts.setLanguage('zh-CN');
