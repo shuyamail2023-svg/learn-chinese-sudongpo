@@ -972,7 +972,7 @@ class _QuizPageState extends State<QuizPage> {
       'answer': '婵娟',
       'choices': ['婵娟', '明月', '清影'],
     },
-  ] : [
+  ] : widget.poemIndex == 1 ? [
 {
   'question': '大江东去，____，千古风流人物。',
   'es': 'Completa el verso.',
@@ -1021,7 +1021,7 @@ class _QuizPageState extends State<QuizPage> {
   'answer': '一尊还酹江月',
   'choices': ['一尊还酹江月', '千古风流人物', '江山如画'],
 },
-] : [
+] : widget.poemIndex == 2 ? [
     {
   'question': '莫听穿林打叶声，____。',
   'es': 'Completa el verso.',
@@ -1070,7 +1070,7 @@ class _QuizPageState extends State<QuizPage> {
   'answer': '也无风雨也无晴',
   'choices': ['也无风雨也无晴', '一蓑烟雨任平生', '何妨吟啸且徐行'],
 },
-];
+] : [];
   Future<void> chooseAnswer(String answer) async {
     final correct =
         answer == questions[questionIndex]['answer'];
