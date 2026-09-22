@@ -1317,9 +1317,9 @@ class CompletionPage extends StatelessWidget {
                   const SizedBox(height: 14),
 
                   Text(
-  poemIndex == 0
+  this.poemIndex == 0
     ? '你已经完成《水调歌头》的全部练习！'
-    : poemIndex == 1
+    : this.poemIndex == 1
         ? '你已经完成《念奴娇·赤壁怀古》的全部练习！'
         : '你已经完成《定风波·莫听穿林打叶声》的全部练习！',
   textAlign: TextAlign.center,
