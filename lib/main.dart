@@ -1245,7 +1245,7 @@ class _QuizPageState extends State<QuizPage> {
 class CompletionPage extends StatelessWidget {
   final int poemIndex;
 
-  const CompletionPage({
+  CompletionPage({
     super.key,
     required this.poemIndex,
   });
@@ -1262,7 +1262,7 @@ class CompletionPage extends StatelessWidget {
   void goBackToStudy(BuildContext context) {
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (_) => StudyPage(poemIndex: poemIndex),
+        builder: (_) => StudyPage(poemIndex: this.poemIndex),
       ),
       (route) => route.isFirst,
     );
@@ -1317,7 +1317,7 @@ class CompletionPage extends StatelessWidget {
                   const SizedBox(height: 14),
 
                   Text(
-  this.poemIndex == 0
+this.poemIndex == 0
     ? '你已经完成《水调歌头》的全部练习！'
     : this.poemIndex == 1
         ? '你已经完成《念奴娇·赤壁怀古》的全部练习！'
