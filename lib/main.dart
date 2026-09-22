@@ -1017,7 +1017,7 @@ class _QuizPageState extends State<QuizPage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (_) => CompletionPage(),
+          builder: (_) => CompletionPage(poemIndex: widget.poemIndex),
         ),
       );
     }
