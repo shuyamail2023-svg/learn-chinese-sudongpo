@@ -368,7 +368,11 @@ class StudyPage extends StatelessWidget {
           child: Column(
             children: [
 Text(
-  poemIndex == 0 ? '《水调歌头》' : '《念奴娇·赤壁怀古》',
+  poemIndex == 0
+    ? '《水调歌头》'
+    : poemIndex == 1
+        ? '《念奴娇·赤壁怀古》'
+        : '《定风波·莫听穿林打叶声》',
   style: const TextStyle(
     fontSize: 27,
     fontWeight: FontWeight.bold,
@@ -376,7 +380,11 @@ Text(
 ),
               const SizedBox(height: 4),
              Text(
-  poemIndex == 0 ? '明月几时有' : '大江东去，浪淘尽',
+  poemIndex == 0
+    ? '明月几时有'
+    : poemIndex == 1
+        ? '大江东去，浪淘尽'
+        : '莫听穿林打叶声',
   style: const TextStyle(
     fontSize: 14,
     color: Colors.black54,
