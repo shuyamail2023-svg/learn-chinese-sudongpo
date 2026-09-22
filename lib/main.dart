@@ -1021,6 +1021,55 @@ class _QuizPageState extends State<QuizPage> {
   'answer': '一尊还酹江月',
   'choices': ['一尊还酹江月', '千古风流人物', '江山如画'],
 },
+] : [
+    {
+  'question': '莫听穿林打叶声，____。',
+  'es': 'Completa el verso.',
+  'answer': '何妨吟啸且徐行',
+  'choices': ['何妨吟啸且徐行', '谁怕一蓑烟雨', '山头斜照相迎'],
+},
+{
+  'question': '竹杖芒鞋轻胜马，____？',
+  'es': 'Completa el verso.',
+  'answer': '谁怕',
+  'choices': ['谁怕', '何妨', '归去'],
+},
+{
+  'question': '谁怕？____。',
+  'es': 'Completa el verso.',
+  'answer': '一蓑烟雨任平生',
+  'choices': ['一蓑烟雨任平生', '山头斜照相迎', '也无风雨也无晴'],
+},
+{
+  'question': '料峭春风吹酒醒，____。',
+  'es': 'Completa el verso.',
+  'answer': '微冷',
+  'choices': ['微冷', '徐行', '归去'],
+},
+{
+  'question': '山头斜照却相迎。____，山头斜照却相迎。',
+  'es': 'Completa el verso.',
+  'answer': '微冷',
+  'choices': ['微冷', '谁怕', '无晴'],
+},
+{
+  'question': '回首向来萧瑟处，____。',
+  'es': 'Completa el verso.',
+  'answer': '归去',
+  'choices': ['归去', '徐行', '相迎'],
+},
+{
+  'question': '归去，也无风雨____。',
+  'es': 'Completa el verso.',
+  'answer': '也无晴',
+  'choices': ['也无晴', '任平生', '且徐行'],
+},
+{
+  'question': '回首向来萧瑟处，归去，____。',
+  'es': 'Completa el último verso.',
+  'answer': '也无风雨也无晴',
+  'choices': ['也无风雨也无晴', '一蓑烟雨任平生', '何妨吟啸且徐行'],
+},
 ];
   Future<void> chooseAnswer(String answer) async {
     final correct =
