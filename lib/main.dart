@@ -410,7 +410,7 @@ Text(
                 title: '跟读',
                 spanish: 'Repetición · 逐句朗读，中西对照',
                 color: const Color(0xFFDDECEF),
-                page: const FollowReadingPage(),
+                page: FollowReadingPage(poemIndex: poemIndex),
               ),
 
               const SizedBox(height: 10),
@@ -651,7 +651,12 @@ late final String poem = widget.poemIndex == 0
 // ==================================================
 
 class FollowReadingPage extends StatefulWidget {
-  const FollowReadingPage({super.key});
+  final int poemIndex;
+
+  const FollowReadingPage({
+    super.key,
+    required this.poemIndex,
+  });
 
   @override
   State<FollowReadingPage> createState() =>
@@ -661,7 +666,7 @@ class FollowReadingPage extends StatefulWidget {
 class _FollowReadingPageState extends State<FollowReadingPage> {
   final FlutterTts tts = FlutterTts();
 
-  final List<Map<String, String>> lines = const [
+  late final List<Map<String, String>> lines = widget.poemIndex == 0 ? [
     {
       'zh': '明月几时有？',
       'py': 'Míng yuè jǐ shí yǒu?',
@@ -707,8 +712,48 @@ class _FollowReadingPageState extends State<FollowReadingPage> {
       'py': 'Dàn yuàn rén cháng jiǔ, qiān lǐ gòng chán juān.',
       'es': 'Deseo que vivamos muchos años y compartamos la misma luna.',
     },
-  ];
-
+  ] : [
+{
+  'zh': '大江东去，浪淘尽，千古风流人物。',
+  'py': 'Dà jiāng dōng qù, làng táo jìn, qiān gǔ fēng liú rén wù.',
+  'es': 'El gran río fluye hacia el este; sus olas se llevan a los grandes personajes de todos los tiempos.',
+},
+    {
+  'zh': '故垒西边，人道是，三国周郎赤壁。',
+  'py': 'Gù lěi xī biān, rén dào shì, Sān Guó Zhōu Láng Chì Bì.',
+  'es': 'Al oeste de la antigua fortaleza, dicen que está el Acantilado Rojo de Zhou Yu, de la época de los Tres Reinos.',
+},
+{
+  'zh': '乱石穿空，惊涛拍岸，卷起千堆雪。',
+  'py': 'Luàn shí chuān kōng, jīng tāo pāi àn, juǎn qǐ qiān duī xuě.',
+  'es': 'Rocas escarpadas atraviesan el cielo; olas furiosas golpean la orilla y levantan espuma como mil montones de nieve.',
+},
+    {
+  'zh': '江山如画，一时多少豪杰。',
+  'py': 'Jiāng shān rú huà, yī shí duō shǎo háo jié.',
+  'es': 'El paisaje parece una pintura; ¡cuántos héroes surgieron en aquella época!',
+},
+{
+  'zh': '遥想公瑾当年，小乔初嫁了，雄姿英发。',
+  'py': 'Yáo xiǎng Gōng Jǐn dāng nián, Xiǎo Qiáo chū jià liǎo, xióng zī yīng fā.',
+  'es': 'Imagino a Gongjin en aquellos años, cuando acababa de casarse con Xiao Qiao, gallardo y lleno de vigor.',
+},
+    {
+  'zh': '羽扇纶巾，谈笑间，樯橹灰飞烟灭。',
+  'py': 'Yǔ shàn guān jīn, tán xiào jiān, qiáng lǔ huī fēi yān miè.',
+  'es': 'Con abanico de plumas y tocado de seda, entre risas, las naves enemigas quedaron reducidas a cenizas.',
+},
+{
+  'zh': '故国神游，多情应笑我，早生华发。',
+  'py': 'Gù guó shén yóu, duō qíng yīng xiào wǒ, zǎo shēng huá fà.',
+  'es': 'Mi espíritu viaja por aquellos antiguos lugares; quizá se rían de mí por ser tan sentimental y haber encanecido tan pronto.',
+},
+{
+  'zh': '人生如梦，一尊还酹江月。',
+  'py': 'Rén shēng rú mèng, yī zūn huán lèi jiāng yuè.',
+  'es': 'La vida es como un sueño; alzo una copa y la ofrezco a la luna sobre el río.',
+},
+    ];
 Future<void> speak(String text) async {
   await tts.stop();
   await tts.setLanguage('zh-CN');
