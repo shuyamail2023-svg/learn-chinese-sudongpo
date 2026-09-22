@@ -787,7 +787,7 @@ class _FollowReadingPageState extends State<FollowReadingPage> {
       'py': 'Huí shǒu xiàng lái xiāo sè chù, guī qù, yě wú fēng yǔ yě wú qíng.',
       'es': 'Miro hacia atrás al lugar azotado por el viento y la lluvia; regreso: ya no hay tormenta ni cielo despejado.',
     },
-  ]
+  ];
 Future<void> speak(String text) async {
   await tts.stop();
   await tts.setLanguage('zh-CN');
