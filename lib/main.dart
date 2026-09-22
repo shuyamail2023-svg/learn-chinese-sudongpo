@@ -1017,7 +1017,7 @@ class _QuizPageState extends State<QuizPage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (_) => const CompletionPage(),
+          builder: (_) => CompletionPage(),
         ),
       );
     }
@@ -1165,7 +1165,12 @@ class _QuizPageState extends State<QuizPage> {
 // ==================================================
 
 class CompletionPage extends StatelessWidget {
-  const CompletionPage({super.key});
+  final int poemIndex;
+
+  const CompletionPage({
+    super.key,
+    required this.poemIndex,
+  });
 
   void goToPoemSelection(BuildContext context) {
     Navigator.of(context).pushAndRemoveUntil(
@@ -1179,7 +1184,7 @@ class CompletionPage extends StatelessWidget {
   void goBackToStudy(BuildContext context) {
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (_) => const StudyPage(poemIndex: 0),
+        builder: (_) => StudyPage(poemIndex: poemIndex),
       ),
       (route) => route.isFirst,
     );
@@ -1233,15 +1238,17 @@ class CompletionPage extends StatelessWidget {
 
                   const SizedBox(height: 14),
 
-                  const Text(
-                    '你已经完成《水调歌头》的全部练习！',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+                  Text(
+  poemIndex == 0
+      ? '你已经完成《水调歌头》的全部练习！'
+      : '你已经完成《念奴娇·赤壁怀古》的全部练习！',
+  textAlign: TextAlign.center,
+  style: const TextStyle(
+    color: Colors.white,
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+  ),
+),
 
                   const SizedBox(height: 5),
 
