@@ -1046,30 +1046,8 @@ class _QuizPageState extends State<QuizPage> {
   'answer': '微冷',
   'choices': ['微冷', '徐行', '归去'],
 },
-{
-  'question': '山头斜照却相迎。____，山头斜照却相迎。',
-  'es': 'Completa el verso.',
-  'answer': '微冷',
-  'choices': ['微冷', '谁怕', '无晴'],
-},
-{
-  'question': '回首向来萧瑟处，____。',
-  'es': 'Completa el verso.',
-  'answer': '归去',
-  'choices': ['归去', '徐行', '相迎'],
-},
-{
-  'question': '归去，也无风雨____。',
-  'es': 'Completa el verso.',
-  'answer': '也无晴',
-  'choices': ['也无晴', '任平生', '且徐行'],
-},
-{
-  'question': '回首向来萧瑟处，归去，____。',
-  'es': 'Completa el último verso.',
-  'answer': '也无风雨也无晴',
-  'choices': ['也无风雨也无晴', '一蓑烟雨任平生', '何妨吟啸且徐行'],
-},
+
+
 ] : [];
   Future<void> chooseAnswer(String answer) async {
     final correct =
@@ -1323,8 +1301,10 @@ class CompletionPage extends StatelessWidget {
 
                   Text(
   poemIndex == 0
-      ? '你已经完成《水调歌头》的全部练习！'
-      : '你已经完成《念奴娇·赤壁怀古》的全部练习！',
+    ? '你已经完成《水调歌头》的全部练习！'
+    : poemIndex == 1
+        ? '你已经完成《念奴娇·赤壁怀古》的全部练习！'
+        : '你已经完成《定风波·莫听穿林打叶声》的全部练习！',
   textAlign: TextAlign.center,
   style: const TextStyle(
     color: Colors.white,
