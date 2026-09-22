@@ -725,7 +725,7 @@ class _FollowReadingPageState extends State<FollowReadingPage> {
       'py': 'Dàn yuàn rén cháng jiǔ, qiān lǐ gòng chán juān.',
       'es': 'Deseo que vivamos muchos años y compartamos la misma luna.',
     },
-  ] : [
+  ] : widget.poemIndex == 1 ? [
 {
   'zh': '大江东去，浪淘尽，千古风流人物。',
   'py': 'Dà jiāng dōng qù, làng táo jìn, qiān gǔ fēng liú rén wù.',
@@ -766,6 +766,7 @@ class _FollowReadingPageState extends State<FollowReadingPage> {
   'py': 'Rén shēng rú mèng, yī zūn huán lèi jiāng yuè.',
   'es': 'La vida es como un sueño; alzo una copa y la ofrezco a la luna sobre el río.',
 },
+    ] : [
         {
       'zh': '莫听穿林打叶声，何妨吟啸且徐行。',
       'py': 'Mò tīng chuān lín dǎ yè shēng, hé fáng yín xiào qiě xú xíng.',
@@ -786,7 +787,7 @@ class _FollowReadingPageState extends State<FollowReadingPage> {
       'py': 'Huí shǒu xiàng lái xiāo sè chù, guī qù, yě wú fēng yǔ yě wú qíng.',
       'es': 'Miro hacia atrás al lugar azotado por el viento y la lluvia; regreso: ya no hay tormenta ni cielo despejado.',
     },
-  ];
+  ];xu
 Future<void> speak(String text) async {
   await tts.stop();
   await tts.setLanguage('zh-CN');
