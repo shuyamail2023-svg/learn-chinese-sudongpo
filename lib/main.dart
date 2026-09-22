@@ -421,7 +421,7 @@ Text(
                 title: '填空练习',
                 spanish: 'Completar · 趣味练习，巩固记忆',
                 color: const Color(0xFFF9E7CA),
-                page: const QuizPage(),
+                page: QuizPage(poemIndex: poemIndex),
               ),
             ],
           ),
@@ -866,7 +866,12 @@ Future<void> speak(String text) async {
 // ==================================================
 
 class QuizPage extends StatefulWidget {
-  const QuizPage({super.key});
+  final int poemIndex;
+
+  const QuizPage({
+    super.key,
+    required this.poemIndex,
+  });
 
   @override
   State<QuizPage> createState() => _QuizPageState();
@@ -877,7 +882,8 @@ class _QuizPageState extends State<QuizPage> {
   String? selectedAnswer;
   bool answeredCorrectly = false;
 
-  final List<Map<String, dynamic>> questions = [
+  late final List<Map<String, dynamic>> questions =
+    widget.poemIndex == 0 ? [
     {
       'question': '明月 ____ 时有？',
       'es': 'Completa la palabra que falta.',
@@ -932,8 +938,26 @@ class _QuizPageState extends State<QuizPage> {
       'answer': '婵娟',
       'choices': ['婵娟', '明月', '清影'],
     },
+  ] : [
+{
+  'question': '大江东去，____，千古风流人物。',
+  'es': 'Completa el verso.',
+  'answer': '浪淘尽',
+  'choices': ['浪淘尽', '卷起雪', '拍岸边'],
+},
+{
+  'question': '故垒西边，人道是，____。',
+  'es': 'Completa el verso.',
+  'answer': '三国周郎赤壁',
+  'choices': ['三国周郎赤壁', '千古风流人物', '一时多少豪杰'],
+},
+{
+  'question': '乱石穿空，惊涛拍岸，____。',
+  'es': 'Completa el verso.',
+  'answer': '卷起千堆雪',
+  'choices': ['卷起千堆雪', '浪淘尽', '江山如画'],
+},
   ];
-
   Future<void> chooseAnswer(String answer) async {
     final correct =
         answer == questions[questionIndex]['answer'];
