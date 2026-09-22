@@ -1063,14 +1063,7 @@ class _QuizPageState extends State<QuizPage> {
   'question': '归去，____。',
   'es': 'Completa el verso.',
   'answer': '也无风雨也无晴',
-  'choices': ['也无风雨也无晴', '一蓑烟雨任平生', '山头斜照却相迎'],
-},
-{
-  'question': '竹杖芒鞋轻胜马，谁怕？____。',
-  'es': 'Completa el verso.',
-  'answer': '一蓑烟雨任平生',
-  'choices': ['一蓑烟雨任平生', '也无风雨也无晴', '山头斜照却相迎'],
-},
+  'choices': ['也无风雨也无晴', '一蓑烟雨任平生', '山头斜照却
 
 ] : [];
   Future<void> chooseAnswer(String answer) async {
