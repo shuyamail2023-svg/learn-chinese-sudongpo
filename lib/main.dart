@@ -1022,11 +1022,12 @@ class _QuizPageState extends State<QuizPage> {
   'choices': ['一尊还酹江月', '千古风流人物', '江山如画'],
 },
 ] : widget.poemIndex == 2 ? [
-    {
+
+{
   'question': '莫听穿林打叶声，____。',
   'es': 'Completa el verso.',
   'answer': '何妨吟啸且徐行',
-  'choices': ['何妨吟啸且徐行', '谁怕一蓑烟雨', '山头斜照相迎'],
+  'choices': ['何妨吟啸且徐行', '谁怕', '一蓑烟雨任平生'],
 },
 {
   'question': '竹杖芒鞋轻胜马，____？',
@@ -1038,7 +1039,7 @@ class _QuizPageState extends State<QuizPage> {
   'question': '谁怕？____。',
   'es': 'Completa el verso.',
   'answer': '一蓑烟雨任平生',
-  'choices': ['一蓑烟雨任平生', '山头斜照相迎', '也无风雨也无晴'],
+  'choices': ['一蓑烟雨任平生', '山头斜照却相迎', '也无风雨也无晴'],
 },
 {
   'question': '料峭春风吹酒醒，____。',
@@ -1046,7 +1047,30 @@ class _QuizPageState extends State<QuizPage> {
   'answer': '微冷',
   'choices': ['微冷', '徐行', '归去'],
 },
-
+{
+  'question': '微冷，____。',
+  'es': 'Completa el verso.',
+  'answer': '山头斜照却相迎',
+  'choices': ['山头斜照却相迎', '一蓑烟雨任平生', '何妨吟啸且徐行'],
+},
+{
+  'question': '回首向来萧瑟处，____。',
+  'es': 'Completa el verso.',
+  'answer': '归去',
+  'choices': ['归去', '徐行', '谁怕'],
+},
+{
+  'question': '归去，____。',
+  'es': 'Completa el verso.',
+  'answer': '也无风雨也无晴',
+  'choices': ['也无风雨也无晴', '一蓑烟雨任平生', '山头斜照却相迎'],
+},
+{
+  'question': '竹杖芒鞋轻胜马，谁怕？____。',
+  'es': 'Completa el verso.',
+  'answer': '一蓑烟雨任平生',
+  'choices': ['一蓑烟雨任平生', '也无风雨也无晴', '山头斜照却相迎'],
+},
 
 ] : [];
   Future<void> chooseAnswer(String answer) async {
