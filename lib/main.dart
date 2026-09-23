@@ -1609,7 +1609,11 @@ class CompletionPage extends StatelessWidget {
                 ? '你已经完成《江城子·密州出猎》的全部练习！'
                 : poemIndex == 4
     ? '你已经完成《江城子·乙卯正月二十日夜记梦》的全部练习！'
-    : '你已经完成《蝶恋花·春景》的全部练习！',
+    : poemIndex == 5
+        ? '你已经完成《蝶恋花·春景》的全部练习！'
+        : poemIndex == 6
+            ? '你已经完成《浣溪沙·游蕲水清泉寺》的全部练习！'
+            : '你已经完成全部练习！',
   textAlign: TextAlign.center,
   style: const TextStyle(
     color: Colors.white,
