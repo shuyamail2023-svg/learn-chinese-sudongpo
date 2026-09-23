@@ -808,7 +808,7 @@ class _FollowReadingPageState extends State<FollowReadingPage> {
       'py': 'Huí shǒu xiàng lái xiāo sè chù, guī qù, yě wú fēng yǔ yě wú qíng.',
       'es': 'Miro hacia atrás al lugar azotado por el viento y la lluvia; regreso: ya no hay tormenta ni cielo despejado.',
     },
-  ] : [
+  ] : widget.poemIndex == 3 ? [
   {
     'zh': '老夫聊发少年狂，左牵黄，右擎苍。',
     'py': 'Lǎo fū liáo fā shào nián kuáng, zuǒ qiān huáng, yòu qíng cāng.',
