@@ -1063,7 +1063,7 @@ class _QuizPageState extends State<QuizPage> {
   'question': '归去，____。',
   'es': 'Completa el verso.',
   'answer': '也无风雨也无晴',
-  'choices': ['也无风雨也无晴', '一蓑烟雨任平生', '山头斜照却
+  'choices': ['也无风雨也无晴', '一蓑烟雨任平生', '山头斜照却相迎'],
 },
 ] : [];
   Future<void> chooseAnswer(String answer) async {
@@ -1317,9 +1317,9 @@ class CompletionPage extends StatelessWidget {
                   const SizedBox(height: 14),
 
                   Text(
-widget.poemIndex == 0
+      poemIndex == 0
     ? '你已经完成《水调歌头》的全部练习！'
-    : widget.poemIndex == 1
+    :poemIndex == 1
         ? '你已经完成《念奴娇·赤壁怀古》的全部练习！'
         : '你已经完成《定风波·莫听穿林打叶声》的全部练习！',
   textAlign: TextAlign.center,
