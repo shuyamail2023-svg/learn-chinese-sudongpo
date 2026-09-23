@@ -1186,6 +1186,43 @@ class _QuizPageState extends State<QuizPage> {
     'answer': '射天狼',
     'choices': ['射天狼', '亲射虎', '千骑卷平冈'],
   },
+] : widget.poemIndex == 4 ? [
+  {
+    'question': '十年生死两茫茫，____，自难忘。',
+    'es': 'Completa el verso.',
+    'answer': '不思量',
+    'choices': ['不思量', '无处话', '惟有泪'],
+  },
+  {
+    'question': '千里孤坟，____。',
+    'es': 'Completa el verso.',
+    'answer': '无处话凄凉',
+    'choices': ['无处话凄凉', '自难忘', '鬓如霜'],
+  },
+  {
+    'question': '纵使相逢应不识，尘满面，____。',
+    'es': 'Completa el verso.',
+    'answer': '鬓如霜',
+    'choices': ['鬓如霜', '泪千行', '短松冈'],
+  },
+  {
+    'question': '夜来幽梦忽还乡，小轩窗，____。',
+    'es': 'Completa el verso.',
+    'answer': '正梳妆',
+    'choices': ['正梳妆', '自难忘', '明月夜'],
+  },
+  {
+    'question': '相顾无言，____。',
+    'es': 'Completa el verso.',
+    'answer': '惟有泪千行',
+    'choices': ['惟有泪千行', '无处话凄凉', '尘满面'],
+  },
+  {
+    'question': '料得年年肠断处，明月夜，____。',
+    'es': 'Completa el verso.',
+    'answer': '短松冈',
+    'choices': ['短松冈', '千里孤坟', '小轩窗'],
+  },
 ] : [];
   Future<void> chooseAnswer(String answer) async {
     final correct =
