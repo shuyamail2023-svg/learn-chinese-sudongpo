@@ -776,7 +776,7 @@ class _FollowReadingPageState extends State<FollowReadingPage> {
   'py': 'Rén shēng rú mèng, yī zūn huán lèi jiāng yuè.',
   'es': 'La vida es como un sueño; alzo una copa y la ofrezco a la luna sobre el río.',
 },
-    ] : [
+    ] : widget.poemIndex == 2 ? [
         {
       'zh': '莫听穿林打叶声，何妨吟啸且徐行。',
       'py': 'Mò tīng chuān lín dǎ yè shēng, hé fáng yín xiào qiě xú xíng.',
@@ -797,7 +797,39 @@ class _FollowReadingPageState extends State<FollowReadingPage> {
       'py': 'Huí shǒu xiàng lái xiāo sè chù, guī qù, yě wú fēng yǔ yě wú qíng.',
       'es': 'Miro hacia atrás al lugar azotado por el viento y la lluvia; regreso: ya no hay tormenta ni cielo despejado.',
     },
-  ];
+  ] : [
+  {
+    'zh': '老夫聊发少年狂，左牵黄，右擎苍。',
+    'py': 'Lǎo fū liáo fā shào nián kuáng, zuǒ qiān huáng, yòu qíng cāng.',
+    'es': 'Este viejo vuelve a sentir el ímpetu de la juventud: a la izquierda llevo al perro amarillo y a la derecha al azor.',
+  },
+  {
+    'zh': '锦帽貂裘，千骑卷平冈。',
+    'py': 'Jǐn mào diāo qiú, qiān qí juǎn píng gāng.',
+    'es': 'Con gorro de brocado y abrigo de marta, mil jinetes atraviesan las colinas.',
+  },
+  {
+    'zh': '为报倾城随太守，亲射虎，看孙郎。',
+    'py': 'Wèi bào qīng chéng suí tài shǒu, qīn shè hǔ, kàn Sūn Láng.',
+    'es': 'Para agradecer a toda la ciudad que sigue al gobernador, cazaré yo mismo al tigre, como lo hizo Sun Lang.',
+  },
+  {
+    'zh': '酒酣胸胆尚开张。鬓微霜，又何妨！',
+    'py': 'Jiǔ hān xiōng dǎn shàng kāi zhāng. Bìn wēi shuāng, yòu hé fáng!',
+    'es': 'Con el vino, mi ánimo se vuelve aún más audaz. Aunque mis sienes tengan algo de escarcha, ¿qué importa?',
+  },
+  {
+    'zh': '持节云中，何日遣冯唐？',
+    'py': 'Chí jié Yún Zhōng, hé rì qiǎn Féng Táng?',
+    'es': '¿Cuándo enviarán a Feng Tang con la insignia imperial a Yunzhong?',
+  },
+  {
+    'zh': '会挽雕弓如满月，西北望，射天狼。',
+    'py': 'Huì wǎn diāo gōng rú mǎn yuè, xī běi wàng, shè Tiān Láng.',
+    'es': 'Tensaré el arco adornado como una luna llena, miraré al noroeste y dispararé hacia la estrella del Lobo Celestial.',
+  },
+];
+
 Future<void> speak(String text) async {
   await tts.stop();
   await tts.setLanguage('zh-CN');
