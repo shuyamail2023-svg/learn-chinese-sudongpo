@@ -1398,9 +1398,11 @@ class CompletionPage extends StatelessWidget {
                   Text(
       poemIndex == 0
     ? '你已经完成《水调歌头》的全部练习！'
-    :poemIndex == 1
+    : poemIndex == 1
         ? '你已经完成《念奴娇·赤壁怀古》的全部练习！'
-        : '你已经完成《定风波·莫听穿林打叶声》的全部练习！',
+        : poemIndex == 2
+            ? '你已经完成《定风波·莫听穿林打叶声》的全部练习！'
+            : '你已经完成《江城子·密州出猎》的全部练习！',
   textAlign: TextAlign.center,
   style: const TextStyle(
     color: Colors.white,
