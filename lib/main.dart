@@ -1107,6 +1107,43 @@ class _QuizPageState extends State<QuizPage> {
   'answer': '也无风雨也无晴',
   'choices': ['也无风雨也无晴', '一蓑烟雨任平生', '山头斜照却相迎'],
 },
+] : widget.poemIndex == 3 ? [
+    {
+    'question': '老夫聊发少年狂，____，右擎苍。',
+    'es': 'Completa el verso.',
+    'answer': '左牵黄',
+    'choices': ['左牵黄', '右擎苍', '千骑卷平冈'],
+  },
+  {
+    'question': '锦帽貂裘，____。',
+    'es': 'Completa el verso.',
+    'answer': '千骑卷平冈',
+    'choices': ['千骑卷平冈', '亲射虎', '左牵黄'],
+  },
+  {
+    'question': '为报倾城随太守，____，看孙郎。',
+    'es': 'Completa el verso.',
+    'answer': '亲射虎',
+    'choices': ['亲射虎', '射天狼', '右擎苍'],
+  },
+  {
+    'question': '酒酣胸胆尚开张。鬓微霜，____！',
+    'es': 'Completa el verso.',
+    'answer': '又何妨',
+    'choices': ['又何妨', '何日遣冯唐', '看孙郎'],
+  },
+  {
+    'question': '持节云中，____？',
+    'es': 'Completa el verso.',
+    'answer': '何日遣冯唐',
+    'choices': ['何日遣冯唐', '又何妨', '西北望'],
+  },
+  {
+    'question': '会挽雕弓如满月，西北望，____。',
+    'es': 'Completa el verso.',
+    'answer': '射天狼',
+    'choices': ['射天狼', '亲射虎', '千骑卷平冈'],
+  },
 ] : [];
   Future<void> chooseAnswer(String answer) async {
     final correct =
