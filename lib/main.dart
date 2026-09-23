@@ -373,8 +373,10 @@ Text(
     : poemIndex == 1
         ? '《念奴娇·赤壁怀古》'
         : poemIndex == 2
-            ? '《定风波·莫听穿林打叶声》'
-            : '《江城子·密州出猎》',
+    ? '《定风波·莫听穿林打叶声》'
+    : poemIndex == 3
+        ? '《江城子·密州出猎》'
+        : '《江城子·乙卯正月二十日夜记梦》',
   style: const TextStyle(
     fontSize: 27,
     fontWeight: FontWeight.bold,
@@ -388,7 +390,9 @@ Text(
         ? '大江东去，浪淘尽'
         : poemIndex == 2
             ? '莫听穿林打叶声'
-            : '老夫聊发少年狂',
+            : poemIndex == 3
+                ? '老夫聊发少年狂'
+                : '十年生死两茫茫',
   style: const TextStyle(
     fontSize: 14,
     color: Colors.black54,
