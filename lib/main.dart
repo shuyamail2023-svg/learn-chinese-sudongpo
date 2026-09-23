@@ -373,12 +373,14 @@ Text(
     : poemIndex == 1
         ? '《念奴娇·赤壁怀古》'
         : poemIndex == 2
-    ? '《定风波·莫听穿林打叶声》'
-    : poemIndex == 3
-    ? '《江城子·密州出猎》'
-    : poemIndex == 4
-        ? '《江城子·乙卯正月二十日夜记梦》'
-        : '《蝶恋花·春景》',
+            ? '《定风波·莫听穿林打叶声》'
+            : poemIndex == 3
+                ? '《江城子·密州出猎》'
+                : poemIndex == 4
+                    ? '《江城子·乙卯正月二十日夜记梦》'
+                    : poemIndex == 5
+                        ? '《蝶恋花·春景》'
+                        : '《浣溪沙·游蕲水清泉寺》',
   style: const TextStyle(
     fontSize: 27,
     fontWeight: FontWeight.bold,
@@ -395,8 +397,10 @@ Text(
             : poemIndex == 3
     ? '老夫聊发少年狂'
     : poemIndex == 4
-        ? '十年生死两茫茫'
-        : '花褪残红青杏小',
+    ? '十年生死两茫茫'
+    : poemIndex == 5
+        ? '花褪残红青杏小'
+        : '山下兰芽短浸溪',
   style: const TextStyle(
     fontSize: 14,
     color: Colors.black54,
