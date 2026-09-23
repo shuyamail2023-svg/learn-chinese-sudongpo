@@ -718,8 +718,9 @@ class FollowReadingPage extends StatefulWidget {
 class _FollowReadingPageState extends State<FollowReadingPage> {
   final FlutterTts tts = FlutterTts();
 
-  late final List<Map<String, String>> lines = widget.poemIndex == 0 ? [
-    widget.poemIndex == 0 ? 
+  late final List<Map<String, String>> lines =
+    widget.poemIndex == 0
+        ? [
     {
       'zh': '明月几时有？',
       'py': 'Míng yuè jǐ shí yǒu?',
