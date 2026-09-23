@@ -1265,6 +1265,43 @@ class _QuizPageState extends State<QuizPage> {
     'answer': '短松冈',
     'choices': ['短松冈', '千里孤坟', '小轩窗'],
   },
+] : widget.poemIndex == 5 ? [
+  {
+    'question': '花褪残红，____。',
+    'es': 'Completa el verso.',
+    'answer': '青杏小',
+    'choices': ['青杏小', '芳草少', '燕子飞'],
+  },
+  {
+    'question': '燕子飞时，____。',
+    'es': 'Completa el verso.',
+    'answer': '绿水人家绕',
+    'choices': ['绿水人家绕', '天涯无芳草', '墙里佳人笑'],
+  },
+  {
+    'question': '枝上柳绵吹又少，____。',
+    'es': 'Completa el verso.',
+    'answer': '天涯何处无芳草',
+    'choices': ['天涯何处无芳草', '绿水人家绕', '多情却被无情恼'],
+  },
+  {
+    'question': '墙里秋千，____。',
+    'es': 'Completa el verso.',
+    'answer': '墙外道',
+    'choices': ['墙外道', '青杏小', '佳人笑'],
+  },
+  {
+    'question': '墙外行人，____。',
+    'es': 'Completa el verso.',
+    'answer': '墙里佳人笑',
+    'choices': ['墙里佳人笑', '绿水人家绕', '天涯无芳草'],
+  },
+  {
+    'question': '笑渐不闻声渐悄，____。',
+    'es': 'Completa el último verso.',
+    'answer': '多情却被无情恼',
+    'choices': ['多情却被无情恼', '天涯何处无芳草', '墙里佳人笑'],
+  },
 ] : [];
   Future<void> chooseAnswer(String answer) async {
     final correct =
