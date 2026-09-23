@@ -372,7 +372,9 @@ Text(
     ? '《水调歌头》'
     : poemIndex == 1
         ? '《念奴娇·赤壁怀古》'
-        : '《定风波·莫听穿林打叶声》',
+        : poemIndex == 2
+            ? '《定风波·莫听穿林打叶声》'
+            : '《江城子·密州出猎》',
   style: const TextStyle(
     fontSize: 27,
     fontWeight: FontWeight.bold,
@@ -384,7 +386,9 @@ Text(
     ? '明月几时有'
     : poemIndex == 1
         ? '大江东去，浪淘尽'
-        : '莫听穿林打叶声',
+        : poemIndex == 2
+            ? '莫听穿林打叶声'
+            : '老夫聊发少年狂',
   style: const TextStyle(
     fontSize: 14,
     color: Colors.black54,
