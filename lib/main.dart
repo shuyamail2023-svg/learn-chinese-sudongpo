@@ -181,7 +181,7 @@ class PoemSelectionPage extends StatelessWidget {
               itemCount: poems.length,
               itemBuilder: (context, index) {
                 final poem = poems[index];
-                final available = index <= 4;
+                final available = index <= 5;
 
                 // 自根据手机高度平均分配给10首诗
                 final itemHeight =
@@ -375,8 +375,10 @@ Text(
         : poemIndex == 2
     ? '《定风波·莫听穿林打叶声》'
     : poemIndex == 3
-        ? '《江城子·密州出猎》'
-        : '《江城子·乙卯正月二十日夜记梦》',
+    ? '《江城子·密州出猎》'
+    : poemIndex == 4
+        ? '《江城子·乙卯正月二十日夜记梦》'
+        : '《蝶恋花·春景》',
   style: const TextStyle(
     fontSize: 27,
     fontWeight: FontWeight.bold,
@@ -391,8 +393,10 @@ Text(
         : poemIndex == 2
             ? '莫听穿林打叶声'
             : poemIndex == 3
-                ? '老夫聊发少年狂'
-                : '十年生死两茫茫',
+    ? '老夫聊发少年狂'
+    : poemIndex == 4
+        ? '十年生死两茫茫'
+        : '花褪残红青杏小',
   style: const TextStyle(
     fontSize: 14,
     color: Colors.black54,
@@ -499,12 +503,19 @@ late final String poem = widget.poemIndex == 0
       '酒酣胸胆尚开张。鬓微霜，又何妨！ \n'
       '持节云中，何日遣冯唐？ \n'
       '会挽雕弓如满月，西北望，射天狼。 '
-    : '十年生死两茫茫，不思量，自难忘。 \n'
+    : widget.poemIndex == 4
+    ? '十年生死两茫茫，不思量，自难忘。 \n'
       '千里孤坟，无处话凄凉。 \n'
       '纵使相逢应不识，尘满面，鬓如霜。 \n\n'
       '夜来幽梦忽还乡，小轩窗，正梳妆。 \n'
       '相顾无言，惟有泪千行。 \n'
-      '料得年年肠断处，明月夜，短松冈。 ';
+      '料得年年肠断处，明月夜，短松冈。 '
+    : '花褪残红青杏小。 \n'
+      '燕子飞时，绿水人家绕。 \n'
+      '枝上柳绵吹又少，天涯何处无芳草。 \n\n'
+      '墙里秋千墙外道。 \n'
+      '墙外行人，墙里佳人笑。 \n'
+      '笑渐不闻声渐悄，多情却被无情恼。 ';
 
   int visibleCharacters = 0;
 
@@ -869,6 +880,37 @@ class _FollowReadingPageState extends State<FollowReadingPage> {
     'zh': '料得年年肠断处，明月夜，短松冈。',
     'py': 'Liào dé nián nián cháng duàn chù, míng yuè yè, duǎn sōng gāng.',
     'es': 'Imagino que cada año, donde el corazón se rompe, hay una noche de luna sobre la colina de pequeños pinos.',
+  },
+] : widget.poemIndex == 5 ? [
+  {
+    'zh': '花褪残红青杏小。',
+    'py': 'Huā tuì cán hóng qīng xìng xiǎo.',
+    'es': 'Las flores pierden su rojo y aparecen pequeños albaricoques verdes.',
+  },
+  {
+    'zh': '燕子飞时，绿水人家绕。',
+    'py': 'Yàn zi fēi shí, lǜ shuǐ rén jiā rào.',
+    'es': 'Cuando vuelan las golondrinas, el agua verde rodea las casas.',
+  },
+  {
+    'zh': '枝上柳绵吹又少，天涯何处无芳草。',
+    'py': 'Zhī shàng liǔ mián chuī yòu shǎo, tiān yá hé chù wú fāng cǎo.',
+    'es': 'Cada vez queda menos algodón de sauce; en cualquier rincón del mundo hay hierba fragante.',
+  },
+  {
+    'zh': '墙里秋千墙外道。',
+    'py': 'Qiáng lǐ qiū qiān qiáng wài dào.',
+    'es': 'Dentro del muro hay un columpio; fuera, un camino.',
+  },
+  {
+    'zh': '墙外行人，墙里佳人笑。',
+    'py': 'Qiáng wài xíng rén, qiáng lǐ jiā rén xiào.',
+    'es': 'Fuera del muro pasa un caminante; dentro ríe una joven.',
+  },
+  {
+    'zh': '笑渐不闻声渐悄，多情却被无情恼。',
+    'py': 'Xiào jiàn bù wén shēng jiàn qiǎo, duō qíng què bèi wú qíng nǎo.',
+    'es': 'La risa se aleja hasta desaparecer; el enamorado queda afligido por quien no conoce su amor.',
   },
 ] : [];
 
