@@ -839,7 +839,38 @@ class _FollowReadingPageState extends State<FollowReadingPage> {
     'py': 'Huì wǎn diāo gōng rú mǎn yuè, xī běi wàng, shè Tiān Láng.',
     'es': 'Tensaré el arco adornado como una luna llena, miraré al noroeste y dispararé hacia la estrella del Lobo Celestial.',
   },
-];
+] : widget.poemIndex == 4 ? [
+  {
+    'zh': '十年生死两茫茫，不思量，自难忘。',
+    'py': 'Shí nián shēng sǐ liǎng máng máng, bù sī liáng, zì nán wàng.',
+    'es': 'Diez años separan la vida y la muerte; aunque no piense en ti, no puedo olvidarte.',
+  },
+  {
+    'zh': '千里孤坟，无处话凄凉。',
+    'py': 'Qiān lǐ gū fén, wú chù huà qī liáng.',
+    'es': 'Tu tumba solitaria está a mil li; no hay lugar donde expresar mi tristeza.',
+  },
+  {
+    'zh': '纵使相逢应不识，尘满面，鬓如霜。',
+    'py': 'Zòng shǐ xiāng féng yīng bù shí, chén mǎn miàn, bìn rú shuāng.',
+    'es': 'Aunque nos encontráramos, quizá no me reconocerías: el rostro cubierto de polvo y las sienes blancas como escarcha.',
+  },
+  {
+    'zh': '夜来幽梦忽还乡，小轩窗，正梳妆。',
+    'py': 'Yè lái yōu mèng hū huán xiāng, xiǎo xuān chuāng, zhèng shū zhuāng.',
+    'es': 'Anoche, en un sueño, regresé de pronto a mi tierra natal; junto a la pequeña ventana, estabas arreglándote.',
+  },
+  {
+    'zh': '相顾无言，惟有泪千行。',
+    'py': 'Xiāng gù wú yán, wéi yǒu lèi qiān háng.',
+    'es': 'Nos miramos sin palabras; solo corrían mil líneas de lágrimas.',
+  },
+  {
+    'zh': '料得年年肠断处，明月夜，短松冈。',
+    'py': 'Liào dé nián nián cháng duàn chù, míng yuè yè, duǎn sōng gāng.',
+    'es': 'Imagino que cada año, donde el corazón se rompe, hay una noche de luna sobre la colina de pequeños pinos.',
+  },
+] : [];
 
 Future<void> speak(String text) async {
   await tts.stop();
