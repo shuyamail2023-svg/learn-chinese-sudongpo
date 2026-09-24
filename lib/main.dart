@@ -528,7 +528,8 @@ late final String poem = widget.poemIndex == 0
     ? '横看成岭侧成峰，\n'
       '远近高低各不同。\n'
       '不识庐山真面目，\n'
-      '只缘身在此山中。';
+      '只缘身在此山中。'
+    :'';  
   int visibleCharacters = 0;
 
   @override
