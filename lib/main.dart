@@ -524,9 +524,10 @@ late final String poem = widget.poemIndex == 0
     : widget.poemIndex == 6
     ? '山下兰芽短浸溪，松间沙路净无泥，萧萧暮雨子规啼。 \n'
       '谁道人生无再少？门前流水尚能西！休将白发唱黄鸡。'
-    : '横看成岭侧成峰，远近高低各不同。 \n'
-      '不识庐山真面目，只缘身在此山中。';
-
+    : '横看成岭侧成峰，\n'
+      '远近高低各不同。\n'
+      '不识庐山真面目，\n'
+      '只缘身在此山中。';
   int visibleCharacters = 0;
 
   @override
