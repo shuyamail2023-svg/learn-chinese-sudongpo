@@ -383,8 +383,10 @@ Text(
                         : poemIndex == 6
     ? '《浣溪沙·游蕲水清泉寺》'
     : poemIndex == 7
-        ? '《题西林壁》'
-        : '《饮湖上初晴后雨》',
+    ? '《题西林壁》'
+    : poemIndex == 8
+        ? '《饮湖上初晴后雨》'
+        : '《惠崇春江晚景》',
   style: const TextStyle(
     fontSize: 27,
     fontWeight: FontWeight.bold,
@@ -407,8 +409,10 @@ Text(
         : poemIndex == 6
     ? '山下兰芽短浸溪'
     : poemIndex == 7
-        ? '横看成岭侧成峰'
-        : '水光潋滟晴方好',
+    ? '横看成岭侧成峰'
+    : poemIndex == 8
+        ? '水光潋滟晴方好'
+        : '竹外桃花三两枝',
   style: const TextStyle(
     fontSize: 14,
     color: Colors.black54,
