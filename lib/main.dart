@@ -1374,6 +1374,31 @@ class _QuizPageState extends State<QuizPage> {
     'answer': '休将白发唱黄鸡',
     'choices': ['休将白发唱黄鸡', '谁道人生无再少', '山下兰芽短浸溪'],
   },
+] : widget.poemIndex == 7 ? [
+{
+  'question': '横看成岭侧成____，',
+  'es': 'Completa el verso.',
+  'answer': '峰',
+  'choices': ['峰', '山', '岭'],
+},
+{
+  'question': '远近高低各不____。',
+  'es': 'Completa el verso.',
+  'answer': '同',
+  'choices': ['同', '平', '一'],
+},
+{
+  'question': '不识庐山真____目，',
+  'es': 'Completa el verso.',
+  'answer': '面',
+  'choices': ['面', '眉', '容'],
+},
+{
+  'question': '只缘身在此山____。',
+  'es': 'Completa el verso.',
+  'answer': '中',
+  'choices': ['中', '外', '前'],
+},    
 ] : [];
   Future<void> chooseAnswer(String answer) async {
     final correct =
