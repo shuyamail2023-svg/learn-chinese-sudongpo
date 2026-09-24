@@ -930,22 +930,31 @@ class _FollowReadingPageState extends State<FollowReadingPage> {
     'py': 'Shān xià lán yá duǎn jìn xī, sōng jiān shā lù jìng wú ní, xiāo xiāo mù yǔ zǐ guī tí.',
     'es': 'Al pie de la montaña, los brotes de orquídea se acercan al arroyo; el sendero entre los pinos está limpio y sin barro, y bajo la lluvia del atardecer canta el cuco.',
   },
-  {
     'zh': '谁道人生无再少？门前流水尚能西！休将白发唱黄鸡。',
     'py': 'Shuí dào rén shēng wú zài shào? Mén qián liú shuǐ shàng néng xī! Xiū jiāng bái fà chàng huáng jī.',
     'es': '¿Quién dice que la vida no puede volver a ser joven? ¡El agua frente a la puerta todavía puede correr hacia el oeste! No lamentes la vejez.',
   },
 ] : widget.poemIndex == 7 ? [
   {
-    'zh': '横看成岭侧成峰，远近高低各不同。',
-    'py': 'Héng kàn chéng lǐng cè chéng fēng, yuǎn jìn gāo dī gè bù tóng.',
-    'es': 'Vista de frente es una cordillera; de lado, una cumbre. De cerca o de lejos, alta o baja, cambia su aspecto.',
-  },
-  {
-    'zh': '不识庐山真面目，只缘身在此山中。',
-    'py': 'Bù shí Lúshān zhēn miàn mù, zhǐ yuán shēn zài cǐ shān zhōng.',
-    'es': 'No puedo conocer el verdadero rostro del monte Lu, porque estoy dentro de la propia montaña.',
-  },
+  'zh': '横看成岭侧成峰，',
+  'py': 'Héng kàn chéng lǐng cè chéng fēng,',
+  'es': 'Vista de frente es una cordillera; de lado, un pico.',
+},
+{
+  'zh': '远近高低各不同。',
+  'py': 'Yuǎn jìn gāo dī gè bù tóng.',
+  'es': 'De lejos o de cerca, alto o bajo, cambia su aspecto.',
+},
+{
+  'zh': '不识庐山真面目，',
+  'py': 'Bù shí Lúshān zhēn miàn mù,',
+  'es': 'No puedo conocer el verdadero rostro del monte Lu.',
+},
+{
+  'zh': '只缘身在此山中。',
+  'py': 'Zhǐ yuán shēn zài cǐ shān zhōng.',
+  'es': 'Porque me encuentro dentro de esta misma montaña.',
+},
 ] : [];
 
 Future<void> speak(String text) async {
