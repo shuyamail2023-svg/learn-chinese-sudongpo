@@ -930,6 +930,7 @@ class _FollowReadingPageState extends State<FollowReadingPage> {
     'py': 'Shān xià lán yá duǎn jìn xī, sōng jiān shā lù jìng wú ní, xiāo xiāo mù yǔ zǐ guī tí.',
     'es': 'Al pie de la montaña, los brotes de orquídea se acercan al arroyo; el sendero entre los pinos está limpio y sin barro, y bajo la lluvia del atardecer canta el cuco.',
   },
+  {
     'zh': '谁道人生无再少？门前流水尚能西！休将白发唱黄鸡。',
     'py': 'Shuí dào rén shēng wú zài shào? Mén qián liú shuǐ shàng néng xī! Xiū jiāng bái fà chàng huáng jī.',
     'es': '¿Quién dice que la vida no puede volver a ser joven? ¡El agua frente a la puerta todavía puede correr hacia el oeste! No lamentes la vejez.',
