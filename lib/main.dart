@@ -964,6 +964,27 @@ class _FollowReadingPageState extends State<FollowReadingPage> {
   'py': 'Zhǐ yuán shēn zài cǐ shān zhōng.',
   'es': 'Porque me encuentro dentro de esta misma montaña.',
 },
+] : widget.poemIndex == 8 ? [
+  {
+    'zh': '水光潋滟晴方好。',
+    'py': 'Shuǐ guāng liànyàn qíng fāng hǎo.',
+    'es': 'El agua resplandece bajo el cielo despejado.',
+  },
+  {
+    'zh': '山色空蒙雨亦奇。',
+    'py': 'Shān sè kōng méng yǔ yì qí.',
+    'es': 'Las montañas entre la bruma y la lluvia también son maravillosas.',
+  },
+  {
+    'zh': '欲把西湖比西子。',
+    'py': 'Yù bǎ Xī Hú bǐ Xī Zǐ.',
+    'es': 'Si quisiera comparar el Lago del Oeste con la bella Xizi.',
+  },
+  {
+    'zh': '淡妆浓抹总相宜。',
+    'py': 'Dàn zhuāng nóng mǒ zǒng xiāng yí.',
+    'es': 'Con maquillaje ligero o intenso, siempre luce hermosa.',
+  },
 ] : [];
 
 Future<void> speak(String text) async {
