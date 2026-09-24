@@ -935,6 +935,17 @@ class _FollowReadingPageState extends State<FollowReadingPage> {
     'py': 'Shuí dào rén shēng wú zài shào? Mén qián liú shuǐ shàng néng xī! Xiū jiāng bái fà chàng huáng jī.',
     'es': '¿Quién dice que la vida no puede volver a ser joven? ¡El agua frente a la puerta todavía puede correr hacia el oeste! No lamentes la vejez.',
   },
+] : widget.poemIndex == 7 ? [
+  {
+    'zh': '横看成岭侧成峰，远近高低各不同。',
+    'py': 'Héng kàn chéng lǐng cè chéng fēng, yuǎn jìn gāo dī gè bù tóng.',
+    'es': 'Vista de frente es una cordillera; de lado, una cumbre. De cerca o de lejos, alta o baja, cambia su aspecto.',
+  },
+  {
+    'zh': '不识庐山真面目，只缘身在此山中。',
+    'py': 'Bù shí Lúshān zhēn miàn mù, zhǐ yuán shēn zài cǐ shān zhōng.',
+    'es': 'No puedo conocer el verdadero rostro del monte Lu, porque estoy dentro de la propia montaña.',
+  },
 ] : [];
 
 Future<void> speak(String text) async {
