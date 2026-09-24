@@ -998,6 +998,27 @@ class _FollowReadingPageState extends State<FollowReadingPage> {
     'py': 'Dàn zhuāng nóng mǒ zǒng xiāng yí.',
     'es': 'Con maquillaje ligero o intenso, siempre luce hermosa.',
   },
+] : widget.poemIndex == 9 ? [
+  {
+    'zh': '竹外桃花三两枝。',
+    'py': 'Zhú wài táo huā sān liǎng zhī.',
+    'es': 'Fuera del bambú florecen dos o tres ramas de durazno.',
+  },
+  {
+    'zh': '春江水暖鸭先知。',
+    'py': 'Chūn jiāng shuǐ nuǎn yā xiān zhī.',
+    'es': 'Los patos son los primeros en sentir que el agua del río se ha templado en primavera.',
+  },
+  {
+    'zh': '蒌蒿满地芦芽短。',
+    'py': 'Lóu hāo mǎn dì lú yá duǎn.',
+    'es': 'El suelo está cubierto de artemisa y los brotes de junco aún son cortos.',
+  },
+  {
+    'zh': '正是河豚欲上时。',
+    'py': 'Zhèng shì hé tún yù shàng shí.',
+    'es': 'Es justo la época en que el pez globo remonta el río.',
+  },
 ] : [];
 
 Future<void> speak(String text) async {
