@@ -542,7 +542,12 @@ late final String poem = widget.poemIndex == 0
   '山色空蒙雨亦奇。\n'
   '欲把西湖比西子，\n'
   '淡妆浓抹总相宜。'
-: '';
+: widget.poemIndex == 9
+    ? '竹外桃花三两枝， \n'
+      '春江水暖鸭先知。 \n'
+      '蒌蒿满地芦芽短， \n'
+      '正是河豚欲上时。 '
+    : '';
   int visibleCharacters = 0;
 
   @override
