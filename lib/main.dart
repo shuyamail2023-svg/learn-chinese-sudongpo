@@ -529,7 +529,12 @@ late final String poem = widget.poemIndex == 0
       '远近高低各不同。\n'
       '不识庐山真面目，\n'
       '只缘身在此山中。'
-    :'';  
+  : widget.poemIndex == 8
+? '水光潋滟晴方好，\n'
+  '山色空蒙雨亦奇。\n'
+  '欲把西湖比西子，\n'
+  '淡妆浓抹总相宜。'
+: '';
   int visibleCharacters = 0;
 
   @override
