@@ -1,0 +1,9 @@
+{
+  "name": "跟着苏东坡学中文",
+  "short_name": "东坡中文",
+  "start_url": "/learn-chinese-sudongpo/",
+  "display": "standalone",
+  "background_color": "#F7F2E8",
+  "theme_color": "#F7F2E8",
+  "description": "跟着苏东坡学中文 / Aprende chino con Su Dongpo"
+}
